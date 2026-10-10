@@ -3,95 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
 <title>Optical design portfolio</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:#f3f6fb;--ink:#0d1b33;--mute:#53647f;--line:#cfd8e6;--panel:#ffffff;--hero:#07122b;--hero-ink:#e8f0ff;
---accent:#0a7d4a;--accent-ink:#ffffff;--glass:rgba(10,125,74,.08);
---spec:linear-gradient(90deg,#7a3cff,#2f6bff,#1fb5d6,#2fd27a,#f2d94a,#ff9a3c,#ff4d4d);
+:root{
+color-scheme:dark;
+--void:#030713;--navy:#081331;--deep:#0d2260;--glow:#1a3fa8;
+--ink:#e8efff;--mute:#9db0d6;--line:rgba(120,160,255,.22);
+--panel:rgba(10,24,64,.55);--panel-hi:rgba(20,44,110,.55);
+--photon:#5ee7ff;--photon-ink:#02222b;--violet:#8b6bff;--glass:rgba(94,231,255,.10);
+--spec:linear-gradient(90deg,#8b6bff,#3d7bff,#1fb5d6,#2fd27a,#f2d94a,#ff9a3c,#ff4d4d);
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#060d1f;--ink:#e6eeff;--mute:#8da0c0;--line:#1b2a4a;--panel:#0b1630;--hero:#040a18;--accent:#53e08a;--accent-ink:#04230f;--glass:rgba(83,224,138,.08)}}
-:root[data-theme="dark"]{--bg:#060d1f;--ink:#e6eeff;--mute:#8da0c0;--line:#1b2a4a;--panel:#0b1630;--hero:#040a18;--accent:#53e08a;--accent-ink:#04230f;--glass:rgba(83,224,138,.08)}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--void)}
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "Schibsted Grotesk",system-ui,sans-serif}
+body{margin:0;min-height:100vh;color:var(--ink);font:400 17px/1.6 "Space Grotesk",system-ui,sans-serif;
+background:
+radial-gradient(900px 520px at 85% -5%,rgba(139,107,255,.28),transparent 60%),
+radial-gradient(1000px 600px at 5% 15%,rgba(94,231,255,.14),transparent 60%),
+linear-gradient(180deg,var(--void) 0%,var(--navy) 38%,var(--deep) 78%,var(--glow) 100%) fixed}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(3,7,19,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .topbar::after{content:"";display:block;height:3px;background:var(--spec)}
 .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
-.brand{font-weight:800;letter-spacing:-.01em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
-.brand svg{width:26px;height:26px}
+.brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand svg{width:26px;height:26px;color:var(--photon)}
 nav{display:flex;gap:4px;flex-wrap:wrap}
-nav a{color:var(--mute);text-decoration:none;padding:6px 12px;border-radius:999px;font-size:.95rem}
+nav a{color:var(--mute);text-decoration:none;padding:6px 14px;border-radius:999px;font-size:.95rem;transition:background .2s,color .2s}
 nav a:hover{color:var(--ink);background:var(--glass)}
-nav a[aria-current="page"]{color:var(--accent-ink);background:var(--accent)}
-a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+nav a[aria-current="page"]{color:var(--photon-ink);background:var(--photon);font-weight:500}
+a:focus-visible,button:focus-visible{outline:3px solid var(--photon);outline-offset:3px}
 .page{display:none}.page.on{display:block}
-.hero{background:var(--hero);color:var(--hero-ink);position:relative;overflow:hidden}
-.hero .wrap{padding-top:64px;padding-bottom:40px}
-.eyebrow{font:500 .8rem "JetBrains Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#53e08a;margin:0 0 14px}
-h1{font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.02;font-weight:800;letter-spacing:-.03em;margin:0 0 18px;max-width:14ch}
-.lede{max-width:56ch;color:#a9bbdb;font-size:1.15rem;margin:0}
-.bench{margin-top:36px}
-.bench svg{display:block;width:100%;height:auto}
-.ray{fill:none;stroke-width:1.5;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s ease-out forwards}
+
+/* hero */
+.hero{position:relative;overflow:hidden}
+.hero .wave{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
+.hero .wrap{position:relative;padding-top:68px;padding-bottom:44px}
+.eyebrow{font:500 .85rem "JetBrains Mono",ui-monospace,monospace;letter-spacing:.06em;color:var(--photon);margin:0 0 14px}
+h1{font-size:clamp(2.6rem,7.5vw,5rem);line-height:1.0;font-weight:700;letter-spacing:-.035em;margin:0 0 18px;max-width:12ch;
+background:linear-gradient(100deg,#ffffff 20%,var(--photon) 62%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{max-width:54ch;color:var(--mute);font-size:1.15rem;margin:0}
+.bench{margin-top:38px}
+.bench svg{display:block;width:100%;height:auto;overflow:visible}
+.ray{fill:none;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s ease-out forwards;filter:drop-shadow(0 0 4px currentColor)}
 @keyframes draw{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.ray{animation:none;stroke-dashoffset:0}}
-.cap{font:400 .8rem "JetBrains Mono",ui-monospace,monospace;color:#7f93b8;margin:8px 0 0}
+.cap{font:400 .82rem "JetBrains Mono",ui-monospace,monospace;color:#7f93b8;margin:8px 0 0}
+
 main section.block{padding:56px 0 0}
 h2{font-size:1.8rem;letter-spacing:-.02em;margin:0 0 8px;font-weight:700}
 h2::after{content:"";display:block;width:64px;height:3px;background:var(--spec);margin-top:10px;border-radius:2px}
 .sub{color:var(--mute);margin:0 0 28px;max-width:60ch}
 h3{margin:0 0 8px;font-size:1.2rem}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;color:inherit;text-decoration:none;position:relative;overflow:hidden}
+.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 20px 20px 24px;color:inherit;text-decoration:none;position:relative;overflow:hidden;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:border-color .2s,background .2s}
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--spec)}
-a.card:hover{border-color:var(--accent)}
+a.card:hover{border-color:var(--photon);background:var(--panel-hi)}
 .card p{margin:0;color:var(--mute);font-size:.95rem}
-.tag{display:inline-block;font:500 .75rem "JetBrains Mono",ui-monospace,monospace;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:1px 10px;margin-bottom:10px}
+.tag{display:inline-block;font:500 .75rem "JetBrains Mono",ui-monospace,monospace;color:var(--photon);border:1px solid var(--photon);border-radius:999px;padding:1px 10px;margin-bottom:10px}
 .feature{display:grid;grid-template-columns:1.3fr 1fr;gap:32px}
 .feature p{margin:0 0 14px;max-width:60ch}
-dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:.95rem;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:.95rem;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
 dt{color:var(--mute);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.82rem}dd{margin:0;font-weight:500}
-.crumb{font-size:.9rem;margin:40px 0 0}.crumb a{color:var(--accent)}
+.crumb{font-size:.9rem;margin:40px 0 0}.crumb a{color:var(--photon)}
 .detail{margin-top:40px;max-width:68ch}
 .detail h3{margin-top:30px}
 .detail p{margin:0 0 14px}
 .detail ul{margin:0 0 14px;padding-left:22px}
 .detail li{margin:0 0 8px}
-.fig{margin:28px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.fig{margin:28px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
 .fig img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:6px;background:#fff}
 .fig figcaption{color:var(--mute);font-size:.9rem;margin-top:10px}
 .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:28px}
 .figs .fig{margin:0}
 .results{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0 14px;max-width:none}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.stat b{display:block;font-size:1.6rem;letter-spacing:-.02em;color:var(--accent)}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font-size:1.6rem;letter-spacing:-.02em;color:var(--photon)}
 .stat span{color:var(--mute);font-size:.88rem}
 .prose{max-width:62ch}
 .steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:14px;max-width:62ch}
 .steps li{counter-increment:s;padding-left:46px;position:relative}
-.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:500 .9rem "JetBrains Mono",monospace}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--photon);color:var(--photon-ink);display:grid;place-items:center;font:500 .9rem "JetBrains Mono",monospace;box-shadow:0 0 14px rgba(94,231,255,.45)}
 footer{margin-top:80px;border-top:1px solid var(--line);padding:24px 0 48px;color:var(--mute);font-size:.95rem}
-footer a{color:var(--accent)}
+footer a{color:var(--photon)}
 @media (max-width:720px){.feature{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header class="topbar"><div class="wrap">
-<a class="brand" href="#/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c6 4 6 22 0 26C10 25 10 7 16 3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 16h8M22 16h8" stroke="#53e08a" stroke-width="2" stroke-linecap="round"/></svg>Your Name</a>
+<a class="brand" href="#/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c6 4 6 22 0 26C10 25 10 7 16 3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 16h8M22 16h8" stroke="#8b6bff" stroke-width="2" stroke-linecap="round"/></svg>Your Name</a>
 <nav aria-label="Main"><a href="#/">Home</a><a href="#/designs">Designs</a><a href="#/notes">Notes</a><a href="#/about">About</a><a href="#/contact">Contact</a></nav>
 </div></header>
 
 <main>
 <!-- HOME -->
 <div class="page" data-route="/" data-title="Optical Systems and Design">
-<div class="hero"><div class="wrap">
-<p class="eyebrow">Lens design · GRIN optics </p>
+<div class="hero">
+<svg class="wave" id="wave" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+<div class="wrap">
+<p class="eyebrow">Lens design · GRIN optics</p>
 <h1 tabindex="-1">Optical Systems.</h1>
 <p class="lede">Lens designs modeled and optimized in Zemax OpticStudio.</p>
 <div class="bench"><svg id="rays" viewBox="0 0 900 230" role="img" aria-label="Schematic of rays traveling through four GRIN rod lenses and refocusing at unit magnification"></svg>
-<p class="cap">.</p></div>
+<p class="cap">Four GRIN rods, unit magnification.</p></div>
 </div></div>
 <div class="wrap">
 <section class="block"><h2>Featured design</h2><p class="sub">Current main project.</p>
@@ -202,17 +216,25 @@ var h=p.querySelector("h1,h2");if(h)h.focus({preventScroll:true});
 }
 window.addEventListener("hashchange",route);route();
 
+// Interference pattern: two coherent point sources (double-slit style) behind the hero
+var w=document.getElementById("wave"),wo="",srcs=[[760,200],[760,320]];
+srcs.forEach(function(c,i){
+for(var r=12;r<=720;r+=13){
+wo+='<circle cx="'+c[0]+'" cy="'+c[1]+'" r="'+r+'" fill="none" stroke="'+(i?"#8b6bff":"#5ee7ff")+'" stroke-opacity="'+(Math.max(0,.2-r/4200)).toFixed(3)+'" stroke-width="1"/>'}});
+w.innerHTML=wo;
+
 // Ray schematic: four GRIN rods, sinusoidal ray paths
 var s=document.getElementById("rays"),cy=115,x0=70,rodW=170,gap=20,out="";
-for(var i=0;i<4;i++){var x=x0+i*(rodW+gap);out+='<rect x="'+x+'" y="45" width="'+rodW+'" height="140" rx="10" fill="rgba(120,170,255,.08)" stroke="#2f6bff" stroke-opacity=".6"/>'}
-out+='<line x1="10" y1="'+cy+'" x2="890" y2="'+cy+'" stroke="#5f77a8" stroke-opacity=".4" stroke-dasharray="4 6"/>';
-var cols=["#7a3cff","#2f6bff","#1fb5d6","#2fd27a","#f2d94a","#ff9a3c"],hs=[-40,-24,-8,8,24,40];
+out+='<defs><linearGradient id="rod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ee7ff" stop-opacity=".16"/><stop offset=".5" stop-color="#3d7bff" stop-opacity=".05"/><stop offset="1" stop-color="#8b6bff" stop-opacity=".16"/></linearGradient></defs>';
+for(var i=0;i<4;i++){var x=x0+i*(rodW+gap);out+='<rect x="'+x+'" y="45" width="'+rodW+'" height="140" rx="10" fill="url(#rod)" stroke="#5ee7ff" stroke-opacity=".55"/>'}
+out+='<line x1="10" y1="'+cy+'" x2="890" y2="'+cy+'" stroke="#7f93b8" stroke-opacity=".45" stroke-dasharray="4 6"/>';
+var cols=["#8b6bff","#3d7bff","#1fb5d6","#2fd27a","#f2d94a","#ff9a3c"],hs=[-40,-24,-8,8,24,40];
 hs.forEach(function(h,k){
 var pts=[],y;
 for(var xx=10;xx<=890;xx+=6){
 y=cy-h*Math.cos(Math.PI*(xx-x0)/((rodW+gap)*2));
 pts.push((xx===10?"M":"L")+xx+" "+y.toFixed(1))}
-out+='<path class="ray" style="animation-delay:'+(k*0.15)+'s" stroke="'+cols[k]+'" d="'+pts.join(" ")+'"/>'});
+out+='<path class="ray" style="color:'+cols[k]+';animation-delay:'+(k*0.15)+'s" stroke="'+cols[k]+'" d="'+pts.join(" ")+'"/>'});
 s.innerHTML=out;
 })();
 </script>

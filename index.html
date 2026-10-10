@@ -25,7 +25,7 @@ nav{display:flex;gap:4px;flex-wrap:wrap}
 nav a{color:var(--mute);text-decoration:none;padding:6px 12px;border-radius:999px;font-size:.95rem}
 nav a:hover{color:var(--ink);background:var(--glass)}
 nav a[aria-current="page"]{color:var(--accent-ink);background:var(--accent)}
-a:focus-visible,.tile:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .page{display:none}.page.on{display:block}
 .hero{background:var(--hero);color:var(--hero-ink);position:relative;overflow:hidden}
 .hero .wrap{padding-top:64px;padding-bottom:40px}
@@ -54,12 +54,20 @@ a.card:hover{border-color:var(--accent)}
 dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:.95rem;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
 dt{color:var(--mute);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.82rem}dd{margin:0;font-weight:500}
 .crumb{font-size:.9rem;margin:40px 0 0}.crumb a{color:var(--accent)}
-.slot{margin-top:28px;border:1px dashed var(--mute);border-radius:10px;background:var(--panel) center/contain no-repeat;min-height:220px;display:flex;align-items:center;justify-content:center;color:var(--mute);cursor:pointer;font-family:inherit;width:100%;font-size:.95rem}
-.slot.has{border-style:solid;border-color:var(--line);color:transparent;min-height:320px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.tile{aspect-ratio:4/3;border:1px dashed var(--mute);border-radius:10px;background:var(--panel) center/cover no-repeat;display:flex;align-items:flex-end;padding:12px;color:var(--mute);font-size:.9rem;cursor:pointer;text-align:left;font-family:inherit}
-.tile.has{border-style:solid;border-color:var(--line);color:transparent}
-.note{color:var(--mute);font-size:.9rem;margin:14px 0 0}
+.detail{margin-top:40px;max-width:68ch}
+.detail h3{margin-top:30px}
+.detail p{margin:0 0 14px}
+.detail ul{margin:0 0 14px;padding-left:22px}
+.detail li{margin:0 0 8px}
+.fig{margin:28px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.fig img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:6px;background:#fff}
+.fig figcaption{color:var(--mute);font-size:.9rem;margin-top:10px}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:28px}
+.figs .fig{margin:0}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0 14px;max-width:none}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat b{display:block;font-size:1.6rem;letter-spacing:-.02em;color:var(--accent)}
+.stat span{color:var(--mute);font-size:.88rem}
 .prose{max-width:62ch}
 .steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:14px;max-width:62ch}
 .steps li{counter-increment:s;padding-left:46px;position:relative}
@@ -72,7 +80,7 @@ footer a{color:var(--accent)}
 <body>
 <header class="topbar"><div class="wrap">
 <a class="brand" href="#/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c6 4 6 22 0 26C10 25 10 7 16 3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 16h8M22 16h8" stroke="#53e08a" stroke-width="2" stroke-linecap="round"/></svg>Your Name</a>
-<nav aria-label="Main"><a href="#/">Home</a><a href="#/designs">Designs</a><a href="#/notes">Notes</a><a href="#/lab">Lab</a><a href="#/about">About</a><a href="#/contact">Contact</a></nav>
+<nav aria-label="Main"><a href="#/">Home</a><a href="#/designs">Designs</a><a href="#/notes">Notes</a><a href="#/about">About</a><a href="#/contact">Contact</a></nav>
 </div></header>
 
 <main>
@@ -81,36 +89,77 @@ footer a{color:var(--accent)}
 <div class="hero"><div class="wrap">
 <p class="eyebrow">Lens design · GRIN optics </p>
 <h1 tabindex="-1">Optical Systems.</h1>
-<p class="lede">Lens designs modeled in Zemax OpticStudio, and the bench where they get tested.</p>
+<p class="lede">Lens designs modeled and optimized in Zemax OpticStudio.</p>
 <div class="bench"><svg id="rays" viewBox="0 0 900 230" role="img" aria-label="Schematic of rays traveling through four GRIN rod lenses and refocusing at unit magnification"></svg>
 <p class="cap">.</p></div>
 </div></div>
 <div class="wrap">
 <section class="block"><h2>Featured design</h2><p class="sub">Current main project.</p>
-<div class="cards"><a class="card" href="#/designs/grin-relay"><span class="tag">In progress</span><h3>1:1 GRIN relay for a miniature scope</h3><p>Four GRIN rod lenses, unit magnification, minimal aberration at 0.53 µm.</p></a>
+<div class="cards"><a class="card" href="#/designs/grin-relay"><span class="tag">In progress</span><h3>GRIN miniscope: 1:1 relay</h3><p>Four GRIN rod lenses, unit magnification, minimal aberration at 0.53 µm.</p></a>
 <a class="card" href="#/designs"><span class="tag">All work</span><h3>Browse all designs</h3><p>Lens systems, spot diagrams, and tolerance studies.</p></a>
-<a class="card" href="#/lab"><span class="tag">Bench</span><h3>The lab</h3><p>Photos of the setups where designs get tested.</p></a></div></section>
+<a class="card" href="#/notes"><span class="tag">Process</span><h3>Design notes</h3><p>The workflow I follow from specification to bench test.</p></a></div></section>
 </div></div>
 
 <!-- DESIGNS -->
 <div class="page" data-route="/designs" data-title="Designs"><div class="wrap">
 <section class="block"><h2 tabindex="-1">Optical designs</h2><p class="sub">Each design has its own page with specs, approach, and plots.</p>
 <div class="cards">
-<a class="card" href="#/designs/grin-relay"><span class="tag">In progress</span><h3>1:1 GRIN relay</h3><p>Miniature-scope relay built from four GRIN rod lenses.</p></a>
+<a class="card" href="#/designs/grin-relay"><span class="tag">In progress</span><h3>GRIN miniscope</h3><p>Fluorescence miniscope optics built from a cascade of GRIN rod lenses.</p></a>
 <a class="card" href="#/designs/design-2"><span class="tag">Placeholder</span><h3>Design title</h3><p>One sentence on the goal, the tool, and the result.</p></a>
 <a class="card" href="#/designs/design-3"><span class="tag">Placeholder</span><h3>Design title</h3><p>Add spot diagrams, MTF curves, or a tolerance study here.</p></a>
 </div></section></div></div>
 
-<!-- DESIGN: GRIN RELAY -->
-<div class="page" data-route="/designs/grin-relay" data-title="1:1 GRIN relay"><div class="wrap">
+<!-- DESIGN: GRIN MINISCOPE -->
+<div class="page" data-route="/designs/grin-relay" data-title="GRIN miniscope"><div class="wrap">
 <p class="crumb"><a href="#/designs">← All designs</a></p>
 <section class="block" style="padding-top:20px"><div class="feature"><div>
-<h2 tabindex="-1">1:1 GRIN relay for a miniature scope</h2><p class="sub">An imaging relay with unit magnification and as little aberration as possible.</p>
-<p>Built from four GRIN rod lenses. On-axis performance is good; I'm working on the off-axis field and on trimming the rays that vignette at the front of the first lens.</p>
-<p>Edit this text to describe your approach, what you tried, and what changed the result.</p></div>
-<dl><dt>Tool</dt><dd>Zemax OpticStudio</dd><dt>Wavelength</dt><dd>0.53 µm</dd><dt>Elements</dt><dd>4 GRIN rods</dd><dt>Object NA</dt><dd>0.209</dd><dt>Magnification</dt><dd>1:1</dd><dt>Status</dt><dd>In progress</dd></dl></div>
-<button class="slot" type="button" id="zslot">Click to preview your Zemax layout image</button>
-<p class="note">Preview only. To make the image permanent, send me the file and I'll embed it.</p></section></div></div>
+<h2 tabindex="-1">GRIN miniscope: 1:1 relay for fluorescence imaging</h2><p class="sub">A miniature fluorescence microscope optical system designed and optimized in Ansys Zemax OpticStudio.</p>
+<p>I designed and optimized a miniature fluorescence microscope (miniscope) optical system built from multiple GRIN (gradient-index) rod lenses. The lenses are cascaded into a superposition compound system, and the layout is designed to accommodate dichroic mirrors and excitation/emission filters. The goal is to maximize the usable field of view while minimizing Seidel aberrations.</p></div>
+<dl><dt>Tool</dt><dd>Zemax OpticStudio</dd><dt>Wavelength</dt><dd>0.53 µm</dd><dt>Elements</dt><dd>4 GRIN rods</dd><dt>Object NA</dt><dd>0.209</dd><dt>Fields</dt><dd>0 and 1 mm object height</dd><dt>Magnification</dt><dd>1:1</dd><dt>Status</dt><dd>In progress</dd></dl></div>
+
+<figure class="fig"><img src="images/grin-layout.png" alt="Zemax ray layout of four cascaded GRIN rod lenses, with on-axis rays in blue and off-axis rays in green" width="1100" height="230"><figcaption>Zemax layout: four GRIN rod lenses relaying the object to the image plane. On-axis rays are blue, off-axis rays are green. The orange surface marks an intermediate surface in the prescription.</figcaption></figure>
+
+<div class="detail">
+<h3>Why GRIN lenses</h3>
+<p>GRIN rod lenses focus light through a smoothly varying refractive index inside the glass, so they have flat entrance and exit faces. That makes them very compact, easy to mount and stack, and a natural fit for a head-mounted miniscope, where size and weight are tightly constrained.</p>
+
+<h3>System architecture</h3>
+<ul>
+<li><b>Cascaded GRIN relay.</b> Several GRIN rod lenses are arranged as a superposition compound system. Each segment relays the image onward, so the optical path can be extended while the overall magnification stays at 1:1.</li>
+<li><b>Dichroic mirror.</b> The design leaves room for a dichroic mirror that separates the excitation light from the emitted fluorescence between the lenses.</li>
+<li><b>Excitation and emission filters.</b> Filters isolate the excitation band from the fluorescence signal so that only the emission reaches the detector.</li>
+<li><b>Two-field model.</b> The system is evaluated on-axis and at a 1 mm object height, which shows how performance degrades toward the edge of the field.</li>
+</ul>
+
+<h3>Design goals and optimization</h3>
+<p>The main trade-off in this design is field of view versus aberration. A wider field is more useful for imaging, but off-axis rays push the Seidel aberrations (spherical aberration, coma, astigmatism, field curvature, and distortion) up quickly. My workflow:</p>
+<ul>
+<li>Set up the prescription in sequential mode with the GRIN rod lenses, and trace both fields at 0.53 µm.</li>
+<li>Define merit function targets for unit magnification and a small spot at the image plane.</li>
+<li>Iterate on lens spacing and focus positions, and test how small shifts of individual surfaces affect the on-axis and off-axis spots.</li>
+<li>Check the front of the first lens for vignetting. A few marginal rays were clipped there, so I worked on trimming them out of the beam.</li>
+</ul>
+
+<h3>Results so far</h3>
+<div class="results">
+<div class="stat"><b>0.238 µm</b><span>RMS spot radius, on-axis</span></div>
+<div class="stat"><b>12.84 µm</b><span>RMS spot radius, 1 mm field</span></div>
+<div class="stat"><b>0.996 mm</b><span>image height for a 1.000 mm object</span></div>
+</div>
+<p>On-axis performance is essentially diffraction-limited, and the image height is within half a percent of the object height, so the relay is very close to true 1:1. The off-axis field is the weak point. Its spot is larger and elliptical, which points to residual astigmatism and field aberrations, and that is where my current optimization effort is focused.</p>
+
+<h3>Next steps</h3>
+<ul>
+<li>Reduce the off-axis spot size while holding the on-axis performance.</li>
+<li>Extend the evaluated field of view beyond 1 mm.</li>
+<li>Run a tolerance analysis on spacing, tilt, and index errors.</li>
+</ul>
+</div>
+
+<div class="figs">
+<figure class="fig"><img src="images/grin-spot-diagram.png" alt="Zemax spot diagram at the image plane for the on-axis field and the 1 mm object-height field" width="1066" height="792"><figcaption>Spot diagram at the image plane, 100 µm scale bar. Left: on-axis field, 0.238 µm RMS radius. Right: 1 mm object height, 12.844 µm RMS radius, imaged at -0.996 mm.</figcaption></figure>
+</div>
+</section></div></div>
 
 <div class="page" data-route="/designs/design-2" data-title="Design 2"><div class="wrap"><p class="crumb"><a href="#/designs">← All designs</a></p>
 <section class="block" style="padding-top:20px"><h2 tabindex="-1">Design title</h2><p class="sub">Replace this page with your next design.</p><p class="prose">Describe the goal, the tool, the approach, and the result. Add ray-fan plots and spot diagrams.</p></section></div></div>
@@ -125,11 +174,6 @@ footer a{color:var(--accent)}
 <li><h3>Optimize</h3>Tune merit-function targets and watch for vignetting and aberrations.</li>
 <li><h3>Tolerance</h3>Check how spacing, tilt, and index errors move performance.</li>
 <li><h3>Build and test</h3>Verify on the bench and compare against the model.</li></ol></section></div></div>
-
-<!-- LAB -->
-<div class="page" data-route="/lab" data-title="Lab"><div class="wrap">
-<section class="block"><h2 tabindex="-1">The lab</h2><p class="sub">Bench setups and hardware.</p><div class="grid" id="tiles"></div>
-<p class="note">These tiles are placeholders. Click one to preview a photo from your computer. To make photos permanent, ask me to embed them in the page.</p></section></div></div>
 
 <!-- ABOUT -->
 <div class="page" data-route="/about" data-title="About"><div class="wrap">
@@ -159,24 +203,17 @@ var h=p.querySelector("h1,h2");if(h)h.focus({preventScroll:true});
 window.addEventListener("hashchange",route);route();
 
 // Ray schematic: four GRIN rods, sinusoidal ray paths
-var s=document.getElementById("rays"),NS="http://www.w3.org/2000/svg",cy=115,x0=70,rodW=170,gap=20,out="";
+var s=document.getElementById("rays"),cy=115,x0=70,rodW=170,gap=20,out="";
 for(var i=0;i<4;i++){var x=x0+i*(rodW+gap);out+='<rect x="'+x+'" y="45" width="'+rodW+'" height="140" rx="10" fill="rgba(120,170,255,.08)" stroke="#2f6bff" stroke-opacity=".6"/>'}
 out+='<line x1="10" y1="'+cy+'" x2="890" y2="'+cy+'" stroke="#5f77a8" stroke-opacity=".4" stroke-dasharray="4 6"/>';
 var cols=["#7a3cff","#2f6bff","#1fb5d6","#2fd27a","#f2d94a","#ff9a3c"],hs=[-40,-24,-8,8,24,40];
 hs.forEach(function(h,k){
-var d="",pts=[];
+var pts=[],y;
 for(var xx=10;xx<=890;xx+=6){
-var t=(xx-x0)/(rodW+gap),y=cy+h*Math.cos(Math.PI*(xx-x0)/(rodW+gap)*0.5*2/1.0*0.5);
 y=cy-h*Math.cos(Math.PI*(xx-x0)/((rodW+gap)*2));
 pts.push((xx===10?"M":"L")+xx+" "+y.toFixed(1))}
 out+='<path class="ray" style="animation-delay:'+(k*0.15)+'s" stroke="'+cols[k]+'" d="'+pts.join(" ")+'"/>'});
 s.innerHTML=out;
-
-// Image preview helpers
-function preview(el,input){input.onchange=function(){var f=input.files&&input.files[0];if(!f)return;var r=new FileReader();r.onload=function(){el.style.backgroundImage="url("+r.result+")";el.classList.add("has")};r.readAsDataURL(f)};el.onclick=function(){input.click()}}
-var z=document.getElementById("zslot"),zi=document.createElement("input");zi.type="file";zi.accept="image/*";zi.hidden=true;z.appendChild(zi);preview(z,zi);
-var g=document.getElementById("tiles");
-for(var j=1;j<=6;j++){var b=document.createElement("button");b.className="tile";b.type="button";b.textContent="Lab photo "+j;var f=document.createElement("input");f.type="file";f.accept="image/*";f.hidden=true;b.appendChild(f);preview(b,f);g.appendChild(b)}
 })();
 </script>
 </body>

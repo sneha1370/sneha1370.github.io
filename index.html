@@ -128,7 +128,7 @@ footer a{color:var(--photon)}
 <p class="crumb"><a href="#/designs">← All designs</a></p>
 <section class="block" style="padding-top:20px"><div class="feature"><div>
 <h2 tabindex="-1">GRIN miniscope: 1:1 relay for fluorescence imaging</h2><p class="sub">A miniature fluorescence microscope optical system designed and optimized in Ansys Zemax OpticStudio.</p>
-<p>I designed and optimized a miniature fluorescence microscope (miniscope) optical system built from multiple GRIN (gradient-index) rod lenses. The lenses are cascaded into a superposition compound system, and the layout is designed to accommodate dichroic mirrors and excitation/emission filters. The goal is to maximize the usable field of view while minimizing Seidel aberrations.</p></div>
+<p>I designed and optimized a miniature fluorescence microscope (miniscope) built from multiple GRIN (gradient-index) rod lenses. The lenses are cascaded into a superposition compound system, and the layout is designed to accommodate excitation/emission bandpass filters and an external illumintation system. The goal is to maximize the usable field of view while minimizing Seidel aberrations.</p></div>
 <dl><dt>Tool</dt><dd>Zemax OpticStudio</dd><dt>Wavelength</dt><dd>0.53 µm</dd><dt>Elements</dt><dd>4 GRIN rods</dd><dt>Object NA</dt><dd>0.209</dd><dt>Fields</dt><dd>0 and 1 mm object height</dd><dt>Magnification</dt><dd>1:1</dd><dt>Status</dt><dd>In progress</dd></dl></div>
 
 <figure class="fig"><img src="images/grin-layout.png" alt="Zemax ray layout of four cascaded GRIN rod lenses, with on-axis rays in blue and off-axis rays in green" width="1100" height="230"><figcaption>Zemax layout: four GRIN rod lenses relaying the object to the image plane. On-axis rays are blue, off-axis rays are green. The orange surface marks an intermediate surface in the prescription.</figcaption></figure>
@@ -140,8 +140,7 @@ footer a{color:var(--photon)}
 <h3>System architecture</h3>
 <ul>
 <li><b>Cascaded GRIN relay.</b> Several GRIN rod lenses are arranged as a superposition compound system. Each segment relays the image onward, so the optical path can be extended while the overall magnification stays at 1:1.</li>
-<li><b>Dichroic mirror.</b> The design leaves room for a dichroic mirror that separates the excitation light from the emitted fluorescence between the lenses.</li>
-<li><b>Excitation and emission filters.</b> Filters isolate the excitation band from the fluorescence signal so that only the emission reaches the detector.</li>
+<li><b>Dichroic mirror.</b> The design leaves room for a bandpass filter for the emitted fluorescence between the lenses. In order to limit the size of the system, an external illumination system will be used which will inharently separated the exitation and emission light, removing the need for dichoric mirror. </li>
 <li><b>Two-field model.</b> The system is evaluated on-axis and at a 1 mm object height, which shows how performance degrades toward the edge of the field.</li>
 </ul>
 

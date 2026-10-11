@@ -334,14 +334,14 @@ footer a{color:var(--photon)}
 <div class="ham">H = −t Σ (|i⟩⟨i+1| + |i+1⟩⟨i|) + Σ εᵢ |i⟩⟨i|</div>
 <p style="margin-top:14px">The hopping strength is t = 1, and each on-site energy εᵢ is drawn uniformly from [−W/2, W/2], so W sets the disorder. To measure localization I used the inverse participation ratio, IPR(ψ) = Σᵢ |ψᵢ|⁴. It is about 1/N for a state spread evenly over N sites and reaches 1 for a state on a single site.</p></section>
 
-<section class="lsec"><h2>How I computed it</h2>
+<section class="lsec"><h2>Methodology</h2>
 <div class="cols">
 <div class="box"><h3>Exact diagonalization</h3><p>The tight-binding Hamiltonian is a real symmetric tridiagonal matrix, diagonalized with scipy.linalg.eigh. IPR is averaged over eigenstates and many independent disorder realizations.</p></div>
 <div class="box"><h3>Time evolution</h3><p>The initial state is projected onto each eigenstate and every term is multiplied by e<sup>−iEₙt</sup> (ħ = 1), which solves the time-dependent Schrödinger equation semi-analytically.</p></div>
 <div class="box"><h3>2D extension</h3><p>A square lattice is mapped onto a one-dimensional index, so a 3 × 3 lattice becomes a 9 × 9 matrix, with hopping −t to all eight surrounding sites (sides and diagonals) and onsite disorder on the diagonal. The same methods then apply.</p></div>
 </div></section>
 
-<section class="lsec"><h2>One dimension</h2>
+<section class="lsec"><h2>One Dimension</h2>
 <p>At W = 0 every eigenstate is Bloch-like and spans the chain, with IPR near 0.015. Band-edge states localize first, because their low group velocity leaves them without the kinetic energy to cross the energy fluctuations. By W = 2 a finite localization length appears, and for W of 4 and above each eigenstate sits on a few sites.</p>
 <div class="bars" role="img" aria-label="Average IPR rises from about 0.015 at W=0 to about 0.53 at W=10">
 <div class="bar"><span>W = 0</span><i style="width:3%"></i><span>0.015</span></div>
@@ -351,15 +351,15 @@ footer a{color:var(--photon)}
 <div class="bar"><span>W = 8</span><i style="width:85%"></i><span>≈0.45</span></div>
 <div class="bar"><span>W = 10</span><i style="width:100%"></i><span>≈0.53</span></div>
 </div>
-<p class="cap">Average IPR against disorder, N = 100, 50 realizations. Values read from the plot in the report.</p>
+<p class="cap">Average IPR against disorder, N = 100, 50 realizations.</p>
 <p>The wave-packet dynamics tell the same story. At W = 0 the packet spreads ballistically in a light cone and the mean squared displacement exceeds 1300 sites². It drops to about 200 at W = 2, about 30 at W = 4, and just a few at W = 8, where the packet stays on a narrow stripe around its starting site.</p></section>
 
-<section class="lsec"><h2>Two dimensions</h2>
+<section class="lsec"><h2>Two Dimensions</h2>
 <p>The trend matches 1D, but it is more gradual. On the 100 × 100 lattice the IPR of the plotted eigenstate is 0.0003 at W = 0 and 0.5, 0.0004 at W = 2, and 0.0056 at W = 8, where the probability collects in a small patch. Wave packets still spread across much of the lattice at W = 2, and the mean squared displacement at t = 100 falls from about 1650 (W = 0) to about 1550 (W = 2) and 1150 (W = 8), far above the 1D values.</p>
 <p>Two-dimensional systems localize at any disorder in the infinite-size limit, but the localization length grows exponentially as disorder weakens. When it exceeds the lattice size, the states look extended, so a finite 2D lattice needs stronger disorder than a 1D chain to show pronounced localization.</p></section>
 
 <section class="lsec"><h2>Sources</h2>
-<p class="refs"><a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.109.1492">Anderson, Absence of Diffusion in Certain Random Lattices, Phys. Rev. 109, 1492 (1958)</a><br><a href="https://iopscience.iop.org/article/10.1088/0034-4885/56/12/001/pdf">Localization: theory and experiment, Rep. Prog. Phys. 56 (1993)</a><br>AI assistance was used for plotting some of the calculations and for reviewing concepts.</p></section>
+<p class="refs"><a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.109.1492">Anderson, Absence of Diffusion in Certain Random Lattices, Phys. Rev. 109, 1492 (1958)</a><br><a href="https://iopscience.iop.org/article/10.1088/0034-4885/56/12/001/pdf">Localization: theory and experiment, Rep. Prog. Phys. 56 (1993)</a><br></p></section>
 </div></div>
 
 

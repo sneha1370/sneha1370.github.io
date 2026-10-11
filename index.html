@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<title>Optical Design Portfolio</title>
+<title>Optical design portfolio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 :root{
@@ -97,6 +97,82 @@ dt{color:var(--mute);font-family:"JetBrains Mono",ui-monospace,monospace;font-si
 .toggle button:hover{color:var(--ink);background:var(--glass)}
 .toggle button[aria-pressed="true"]{background:var(--photon);color:var(--photon-ink);border-color:var(--photon)}
 
+/* home */
+.hhero{position:relative;overflow:hidden;padding:72px 0 36px}
+.hhero .wave{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hhero .wrap{position:relative}
+.hhero h1{max-width:14ch;font-size:clamp(2.8rem,8.5vw,5.8rem)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{padding:11px 22px;border-radius:999px;text-decoration:none;font-weight:500;border:1px solid var(--photon);color:var(--photon);transition:box-shadow .2s}
+.btn.pri{background:var(--photon);color:var(--photon-ink)}
+.btn:hover{box-shadow:0 0 18px rgba(94,231,255,.35)}
+.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.statrow div{padding:22px 20px;border-left:1px solid var(--line)}
+.statrow div:first-child{border-left:0}
+.statrow b{display:block;font-size:2rem;letter-spacing:-.02em;color:var(--photon)}
+.statrow span{color:var(--mute);font-size:.9rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.tile{display:flex;flex-direction:column;gap:10px;min-height:310px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:0 0 20px;color:inherit;text-decoration:none;overflow:hidden;transition:border-color .2s}
+.tile:hover{border-color:var(--photon)}
+.tile svg{display:block;width:100%;height:130px;background:linear-gradient(180deg,rgba(94,231,255,.10),transparent)}
+.tile h3,.tile p{margin:0 20px}
+.tile p{color:var(--mute);font-size:.95rem}
+.tile .go{margin:auto 20px 0;color:var(--photon);font:500 .85rem "JetBrains Mono",ui-monospace,monospace}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 14px;color:var(--mute);font-size:.9rem}
+.band{margin-top:56px;padding:34px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(100deg,rgba(139,107,255,.18),rgba(94,231,255,.10));display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}
+.band h2{margin:0;max-width:26ch}
+.band h2::after{display:none}
+
+/* materials: editorial sections, chain motif */
+.mhero{padding:56px 0 8px}
+.mhero svg{display:block;width:100%;height:130px;margin-top:18px}
+.mhero h1{max-width:18ch;font-size:clamp(2.2rem,6vw,3.8rem)}
+.byline{color:var(--mute);font-size:.95rem;max-width:70ch}
+.msec{display:grid;grid-template-columns:170px 1fr;gap:28px;padding:34px 0;border-top:1px solid var(--line)}
+.msec>h2{font:500 .95rem "JetBrains Mono",ui-monospace,monospace;color:var(--photon);margin:0}
+.msec>h2::after{display:none}
+.msec p{max-width:66ch;margin:0 0 12px}
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);counter-reset:p;list-style:none;padding:0;margin:8px 0 0}
+.pipe li{counter-increment:p;position:relative;padding:42px 10px 0 0;font-size:.95rem}
+.pipe li::before{content:counter(p);position:absolute;top:0;left:0;width:30px;height:30px;border-radius:50%;background:var(--photon);color:var(--photon-ink);display:grid;place-items:center;font:500 .85rem "JetBrains Mono",monospace}
+.pipe li::after{content:"";position:absolute;top:14px;left:38px;right:8px;height:2px;background:var(--spec)}
+.pipe li:last-child::after{display:none}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.box h3{font-size:1rem}
+.box ul,.box p{margin:0;padding-left:18px;color:var(--mute);font-size:.95rem}
+.box p{padding-left:0}
+.find{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.find b{color:var(--photon);font:500 .85rem "JetBrains Mono",ui-monospace,monospace}
+.find p{margin:0}
+.refs{font-size:.92rem;color:var(--mute)}
+.refs a{color:var(--photon)}
+
+/* localization: dot lattice, live lab */
+.loc{position:relative}
+.loc::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(94,231,255,.22) 1px,transparent 1px);background-size:30px 30px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 65%);mask-image:linear-gradient(180deg,#000,transparent 65%);pointer-events:none}
+.loc .wrap{position:relative}
+.lhead{text-align:center;padding:60px 0 8px}
+.lhead h1{margin:0 auto 14px;max-width:16ch;font-size:clamp(2.2rem,6vw,3.8rem)}
+.lhead .lede{margin:0 auto}
+.lab{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:26px}
+.lab canvas{display:block;width:100%;height:auto;border-radius:8px;background:rgba(3,7,19,.6)}
+.ctl{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:12px;font:400 .9rem "JetBrains Mono",ui-monospace,monospace}
+.ctl input[type=range]{flex:1;min-width:180px;accent-color:#5ee7ff}
+.pill{font:500 .85rem "JetBrains Mono",ui-monospace,monospace;color:var(--photon-ink);background:var(--photon);border:0;border-radius:999px;padding:6px 16px;cursor:pointer}
+.read{display:flex;gap:22px;flex-wrap:wrap;color:var(--mute);margin-top:8px;font:400 .85rem "JetBrains Mono",ui-monospace,monospace}
+.read b{color:var(--photon);font-weight:500}
+.lsec{padding-top:48px}
+.lsec p{max-width:68ch}
+.ham{font:400 1rem "JetBrains Mono",ui-monospace,monospace;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow-x:auto;white-space:nowrap;max-width:max-content}
+.bars{display:grid;gap:8px;max-width:640px;margin:14px 0}
+.bar{display:grid;grid-template-columns:64px 1fr 56px;gap:12px;align-items:center;font:400 .85rem "JetBrains Mono",ui-monospace,monospace;color:var(--mute)}
+.bar i{display:block;height:12px;border-radius:6px;background:var(--spec)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+@media (max-width:720px){.msec{grid-template-columns:1fr;gap:10px}.pipe{grid-template-columns:1fr;gap:14px}.pipe li::after{display:none}.find{grid-template-columns:1fr;gap:2px}}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+
 footer{margin-top:80px;border-top:1px solid var(--line);padding:24px 0 48px;color:var(--mute);font-size:.95rem}
 footer a{color:var(--photon)}
 @media (max-width:720px){.feature,.why{grid-template-columns:1fr}}
@@ -104,13 +180,150 @@ footer a{color:var(--photon)}
 </head>
 <body>
 <header class="topbar"><div class="wrap">
-<a class="brand" href="#/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c6 4 6 22 0 26C10 25 10 7 16 3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 16h8M22 16h8" stroke="#8b6bff" stroke-width="2" stroke-linecap="round"/></svg>Your Name</a>
-<nav aria-label="Main"><a href="#/">Home</a><a href="#/designs">Designs</a><a href="#/notes">Notes</a><a href="#/about">About</a><a href="#/contact">Contact</a></nav>
+<a class="brand" href="#/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c6 4 6 22 0 26C10 25 10 7 16 3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 16h8M22 16h8" stroke="#8b6bff" stroke-width="2" stroke-linecap="round"/></svg>Sneha Gupta</a>
+<nav aria-label="Main"><a href="#/">Home</a><a href="#/optics">Optical design</a><a href="#/materials">Materials science</a><a href="#/localization">Anderson localization</a><a href="#/contact">Contact</a></nav>
 </div></header>
 
 <main>
 <!-- HOME -->
-<div class="page" data-route="/" data-title="Optical Systems and Design">
+<div class="page" data-route="/" data-title="Home">
+<div class="hhero"><svg class="wave" id="wave2" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+<div class="wrap">
+<p class="eyebrow">Undergraduate researcher · UC San Diego</p>
+<h1 tabindex="-1">Light, polymers, and disorder.</h1>
+<p class="lede">I'm Sneha Gupta. I design optical systems, simulate polymers atom by atom, and model how random disorder stops waves from spreading. This site collects that work.</p>
+<div class="btns"><a class="btn pri" href="#/optics">Optical design</a><a class="btn" href="#/materials">Materials science</a><a class="btn" href="#/localization">Anderson localization</a></div>
+</div></div>
+<div class="wrap">
+<div class="statrow">
+<div><b>4 GRIN rods</b><span>in a 1:1 fluorescence miniscope relay</span></div>
+<div><b>0.238 µm</b><span>on-axis RMS spot radius at 0.530 µm</span></div>
+<div><b>700 → 300 K</b><span>slow-cooling protocol for TPU melts</span></div>
+<div><b>100 × 100</b><span>sites in 2D localization runs</span></div>
+</div>
+
+<section class="block"><h2>What I work on</h2><p class="sub">Three projects, one thread: how structure, whether a lens stack, a polymer chain, or a random lattice, decides how light, X-rays, and waves behave.</p>
+<div class="tiles">
+<a class="tile" href="#/optics"><svg viewBox="0 0 300 130" aria-hidden="true"><rect x="40" y="30" width="220" height="70" rx="8" fill="rgba(94,231,255,.14)" stroke="#5ee7ff" stroke-opacity=".6"/><path d="M0 65h300" stroke="#7f93b8" stroke-opacity=".5" stroke-dasharray="4 6"/><path d="M0 50C60 50 90 80 150 80S240 50 300 50M0 65C60 65 90 65 150 65S240 65 300 65" fill="none" stroke="#8b6bff" stroke-width="2"/></svg><h3>Optical design</h3><p>Lens design in Zemax OpticStudio. Current project: a miniature fluorescence microscope built from four GRIN rod lenses at unit magnification.</p><span class="go">Explore the designs</span></a>
+<a class="tile" href="#/materials"><svg viewBox="0 0 300 130" aria-hidden="true"><path d="M10 80C50 20 90 120 130 60S210 20 250 70 290 90 295 60" fill="none" stroke="#5ee7ff" stroke-width="2" stroke-opacity=".7"/><g fill="#5fd0d0"><circle cx="10" cy="80" r="6"/><circle cx="70" cy="75" r="6"/><circle cx="130" cy="60" r="6"/><circle cx="190" cy="40" r="6"/><circle cx="250" cy="70" r="6"/></g><g fill="#e5484d"><circle cx="40" cy="45" r="5"/><circle cx="160" cy="48" r="5"/></g><circle cx="100" cy="95" r="6" fill="#5b6cff"/></svg><h3>Materials science</h3><p>Molecular dynamics of bio-based thermoplastic polyurethanes, checked against wide-angle X-ray scattering.</p><span class="go">Read the project</span></a>
+<a class="tile" href="#/localization"><svg viewBox="0 0 300 130" aria-hidden="true"><g fill="#5ee7ff" fill-opacity=".35"><circle cx="30" cy="40" r="3"/><circle cx="70" cy="40" r="3"/><circle cx="110" cy="40" r="3"/><circle cx="190" cy="40" r="3"/><circle cx="230" cy="40" r="3"/><circle cx="270" cy="40" r="3"/><circle cx="30" cy="90" r="3"/><circle cx="70" cy="90" r="3"/><circle cx="110" cy="90" r="3"/><circle cx="190" cy="90" r="3"/><circle cx="230" cy="90" r="3"/><circle cx="270" cy="90" r="3"/></g><circle cx="150" cy="65" r="7" fill="#8b6bff"/><circle cx="150" cy="65" r="20" fill="none" stroke="#8b6bff" stroke-opacity=".6"/><circle cx="150" cy="65" r="34" fill="none" stroke="#8b6bff" stroke-opacity=".25"/></svg><h3>Anderson localization</h3><p>A numerical study of how random on-site energy halts quantum transport in 1D and 2D lattices, with a live simulation you can run.</p><span class="go">Try the simulation</span></a>
+</div></section>
+
+<section class="block"><h2>Where I work</h2><p class="sub">Labs and courses behind the projects above.</p>
+<div class="cards">
+<div class="card"><h3>Computational Imaging Systems Lab</h3><p>UC San Diego. Home of the GRIN miniscope design.</p></div>
+<div class="card"><h3>Atlas Materials Physics Lab</h3><p>UC San Diego, PI Dr. Tod Pascal, supported through the UCSD MRSEC.</p></div>
+<div class="card"><h3>PHYS 141</h3><p>UC San Diego. Final project on Anderson localization.</p></div>
+</div>
+<p class="sub" style="margin-top:22px">Tools</p>
+<div class="chips"><span class="chip">Zemax OpticStudio</span><span class="chip">RadonPy</span><span class="chip">Molecular dynamics</span><span class="chip">Python, NumPy, SciPy</span></div>
+</section>
+
+<div class="band"><h2>Open to conversations about optical design and computational materials.</h2><a class="btn pri" href="#/contact">Get in touch</a></div>
+</div></div>
+
+<!-- MATERIALS SCIENCE -->
+<div class="page" data-route="/materials" data-title="Materials science"><div class="wrap">
+<header class="mhero">
+<p class="eyebrow">Computational materials science · Atlas Materials Physics Lab</p>
+<h1 tabindex="-1">Simulating bio-based polyurethanes</h1>
+<p class="byline">Advisor: Dr. Tod Pascal, Department of Chemical and NanoEngineering, UC San Diego. Mentor: Robert Ramji. Experimental TPUs characterized by the Burkart Research Group. Supported by NSF through the UCSD MRSEC (DMR-2011924).</p>
+<svg id="chain" viewBox="0 0 900 130" aria-hidden="true"></svg>
+</header>
+
+<section class="msec"><h2>Abstract</h2><div><p>The rising prevalence of microplastics, a class of pollutants with exponentially increasing environmental concentrations, and their associated health risks has accelerated the demand for renewable and biodegradable alternatives to petroleum-derived polymers. Polyurethanes (PUs), a versatile class of materials with applications spanning automotive components, bedding, footwear, and coatings, are formed through a step-growth polymerization reaction between diisocyanate and polyol units joined via urethane linkages. However, conventional polyurethanes are not biodegradable, and thus present great sustainability challenges. Recent advances have focused on developing polyurethane formulations derived from renewable components, increasing biodegradability.</p>
+<p>In this work, we employ ab initio and classical molecular dynamics (MD) simulations to model bio-derived thermoplastic polyurethanes (TPUs) and probe their nanoscale conformations and mechanical response under tensile deformation. Model validation was achieved through in-silico production of wide-angle X-ray scattering (WAXS) profiles and thermomechanical properties for TPUs previously formulated and characterized experimentally. Our results suggest that computational modeling can reasonably capture key structure–property relationships in bio-derived TPUs and offer valuable insights into material behavior, establishing a foundation for the development of computational design rules and a high-throughput materials discovery platform.</p></div></section>
+
+<section class="msec"><h2>The problem</h2><div><p>Polyurethanes are everywhere (shoes, car seats, mattresses) and are not biodegradable. Bio-based replacements exist, but there are few comprehensive, high-throughput computational property datasets for polymers to help screen them.</p>
+<p>A thermoplastic polyurethane is built from hard and soft segments (plus a chain extender) joined by urethane linkages. The bio-based TPUs studied here use azelaic-acid polyester soft segments with diol chain extenders (PDO, NDO) and diisocyanates of different chain length (6-HDI, 7-HDI).</p></div></section>
+
+<section class="msec"><h2>The goal</h2><div><p>Produce WAXS profiles in silico for the TPUs the Burkart Research Group has characterized, and see whether the simulated structure matches experiment.</p>
+<p>WAXS measures X-ray scattering at large angles. In k-space it reports how ordered a material is: a narrow peak means crystalline, a broad peak means amorphous. Peak position gives the characteristic spacing through d = 2π/k. The simulated profile is the static structure factor, S(k) = (1/N) Σᵢ Σⱼ exp(−i k·(rᵢ − rⱼ)).</p></div></section>
+
+<section class="msec"><h2>Method</h2><div>
+<p>Each TPU starts as a SMILES string and becomes a simulation-ready polymer in five steps, using RadonPy.</p>
+<ol class="pipe"><li>Build the soft segment</li><li>Build the hard segment</li><li>Assemble the repeat unit</li><li>Build the final TPU chain</li><li>Run molecular dynamics</li></ol>
+<div class="two" style="margin-top:24px">
+<div class="box"><h3>RadonPy protocol</h3><ul><li>Packing</li><li>21-step compression and decompression</li><li>5 ns production run at 300 K</li></ul></div>
+<div class="box"><h3>Slow-cooling protocol</h3><ul><li>Cool from 700 K to 300 K in 50 K steps</li><li>10 ps per cooling step, then 1 ns equilibration</li><li>Anisotropic NPT equilibration, collect time-averaged box dimensions</li><li>Fix the cell at the average, then NVT equilibration</li><li>5 ns production run</li></ul></div>
+</div></div></section>
+
+<section class="msec"><h2>Results</h2><div>
+<div class="find"><b>Peak position</b><p>For TPU1 (DP30, n10) the simulated peak sits at d = 4.33 Å against 3.87 Å in experiment. The larger spacing says the simulated system is not as tightly packed.</p></div>
+<div class="find"><b>Peak width</b><p>The simulated peak is broader than the measured one, so the simulated structure is more amorphous than the real material.</p></div>
+<div class="find"><b>System size</b><p>Changing chain length and chain count (DP10 with 10 chains versus DP5 with 20 chains) gave nearly overlapping profiles.</p></div>
+<div class="find"><b>Protocol</b><p>Doubling the Lennard-Jones ε, scaling RESP charges down 20%, slow-cooling, and the standard RadonPy protocol all produced nearly the same S(k).</p></div>
+<div class="find"><b>NDO-TPU</b><p>Experiment shows a sharp peak near 1.45 Å⁻¹ with a smaller one near 1.6 Å⁻¹. The simulation puts a broad halo near 1.4 Å⁻¹ instead.</p></div>
+<div class="find"><b>Strain</b><p>Simulated tensile strain (rate 1e-5, to 100% and 300%) left the peak position essentially unchanged.</p></div>
+<svg id="waxs" viewBox="0 0 560 220" role="img" aria-label="Schematic of the simulated and experimental WAXS peak positions for TPU1" style="display:block;width:100%;max-width:640px;margin-top:22px"></svg>
+<p class="cap">Schematic built from the reported d-spacings and relative peak widths, not the raw scattering data.</p>
+</div></section>
+
+<section class="msec"><h2>Where it stands</h2><div>
+<p>I haven't yet achieved WAXS agreement. The offset in peak position and width does not move with system size or with the protocol changes above, which is why the next step is the force field.</p>
+<div class="two">
+<div class="box"><h3>Next</h3><ul><li>Implement or develop a new force field</li><li>Try united-atom and coarse-grained models</li></ul></div>
+<div class="box"><h3>Longer term</h3><ul><li>Model other thermo-mechanical properties, such as stress–strain</li><li>Implement computational design rules</li><li>Build a high-throughput materials discovery platform</li></ul></div>
+</div></div></section>
+
+<section class="msec"><h2>References</h2><div class="refs">
+<p>Robe, D., et al. Procedural Construction of Atomistic Polyurethane Block Copolymer Models for High Throughput Simulations. <a href="https://arxiv.org/abs/2405.15226">arXiv:2405.15226</a> (2024).</p>
+<p>Jaisingh, A., et al. Tailoring high hardness and rigidity in biodegradable thermoplastic polyurethanes. ACS Applied Polymer Materials 6(16), 9724–9734 (2024). <a href="https://doi.org/10.1021/acsapm.4c01579">doi:10.1021/acsapm.4c01579</a></p>
+<p>RadonPy, the polymer property calculation library used for model building and simulation.</p>
+</div></section>
+</div></div>
+
+<!-- ANDERSON LOCALIZATION -->
+<div class="page loc" data-route="/localization" data-title="Anderson localization"><div class="wrap">
+<header class="lhead">
+<p class="eyebrow">PHYS 141 final project · UC San Diego</p>
+<h1 tabindex="-1">Disorder alone can stop a wave.</h1>
+<p class="lede">A numerical study of Anderson localization in one- and two-dimensional tight-binding lattices: how random on-site energy turns spreading, extended states into confined ones.</p>
+</header>
+
+<section class="lab" aria-label="Live simulation">
+<canvas id="lab" width="900" height="300" role="img" aria-label="Probability density of a particle on a 101-site disordered chain, evolving in time"></canvas>
+<div class="ctl"><label for="wsl">Disorder W = <b id="wv">2.0</b></label><input id="wsl" type="range" min="0" max="10" step="0.5" value="2"><button class="pill" id="rst" type="button">Restart</button></div>
+<div class="read"><span>t = <b id="rt">0.0</b></span><span>⟨x²⟩ = <b id="rm">0.0</b> sites²</span><span>bars: |ψ|² (square-root scale) · violet line: on-site energies</span></div>
+<p class="cap">A particle starts on the middle site of a 101-site chain with t = 1 and hard walls. This runs live in your browser; the report's results used N = 100 and exact diagonalization.</p>
+</section>
+
+<section class="lsec"><h2>The model</h2>
+<p>Anderson localization, first described by P. W. Anderson in 1958, is the suppression of transport by disorder alone: no confining potential and no interactions between particles, just repeated scattering and interference. For weak disorder the wave still diffuses. As disorder grows, constructive interference of return paths enhances backscattering, transmission decays exponentially with distance, and the particle stays in a finite region.</p>
+<div class="ham">H = −t Σ (|i⟩⟨i+1| + |i+1⟩⟨i|) + Σ εᵢ |i⟩⟨i|</div>
+<p style="margin-top:14px">The hopping strength is t = 1, and each on-site energy εᵢ is drawn uniformly from [−W/2, W/2], so W sets the disorder. To measure localization I used the inverse participation ratio, IPR(ψ) = Σᵢ |ψᵢ|⁴. It is about 1/N for a state spread evenly over N sites and reaches 1 for a state on a single site.</p></section>
+
+<section class="lsec"><h2>How I computed it</h2>
+<div class="cols">
+<div class="box"><h3>Exact diagonalization</h3><p>The tight-binding Hamiltonian is a real symmetric tridiagonal matrix, diagonalized with scipy.linalg.eigh. IPR is averaged over eigenstates and many independent disorder realizations.</p></div>
+<div class="box"><h3>Time evolution</h3><p>The initial state is projected onto each eigenstate and every term is multiplied by e<sup>−iEₙt</sup> (ħ = 1), which solves the time-dependent Schrödinger equation semi-analytically.</p></div>
+<div class="box"><h3>2D extension</h3><p>A square lattice is mapped onto a one-dimensional index, so a 3 × 3 lattice becomes a 9 × 9 matrix, with hopping −t between nearest neighbors and onsite disorder on the diagonal. The same methods then apply.</p></div>
+</div></section>
+
+<section class="lsec"><h2>One dimension</h2>
+<p>At W = 0 every eigenstate is Bloch-like and spans the chain, with IPR near 0.015. Band-edge states localize first, because their low group velocity leaves them without the kinetic energy to cross the energy fluctuations. By W = 2 a finite localization length appears, and for W of 4 and above each eigenstate sits on a few sites.</p>
+<div class="bars" role="img" aria-label="Average IPR rises from about 0.015 at W=0 to about 0.53 at W=10">
+<div class="bar"><span>W = 0</span><i style="width:3%"></i><span>0.015</span></div>
+<div class="bar"><span>W = 2</span><i style="width:22%"></i><span>≈0.11</span></div>
+<div class="bar"><span>W = 4</span><i style="width:47%"></i><span>≈0.25</span></div>
+<div class="bar"><span>W = 6</span><i style="width:70%"></i><span>≈0.37</span></div>
+<div class="bar"><span>W = 8</span><i style="width:85%"></i><span>≈0.45</span></div>
+<div class="bar"><span>W = 10</span><i style="width:100%"></i><span>≈0.53</span></div>
+</div>
+<p class="cap">Average IPR against disorder, N = 100, 50 realizations. Values read from the plot in the report.</p>
+<p>The wave-packet dynamics tell the same story. At W = 0 the packet spreads ballistically in a light cone and the mean squared displacement exceeds 1300 sites². It drops to about 200 at W = 2, about 30 at W = 4, and just a few at W = 8, where the packet stays on a narrow stripe around its starting site.</p></section>
+
+<section class="lsec"><h2>Two dimensions</h2>
+<p>The trend matches 1D, but it is more gradual. On the 100 × 100 lattice the IPR of the plotted eigenstate is 0.0003 at W = 0 and 0.5, 0.0004 at W = 2, and 0.0056 at W = 8, where the probability collects in a small patch. Wave packets still spread across much of the lattice at W = 2, and the mean squared displacement at t = 100 falls from about 1650 (W = 0) to about 1550 (W = 2) and 1150 (W = 8), far above the 1D values.</p>
+<p>Two-dimensional systems localize at any disorder in the infinite-size limit, but the localization length grows exponentially as disorder weakens. When it exceeds the lattice size, the states look extended, so a finite 2D lattice needs stronger disorder than a 1D chain to show pronounced localization.</p></section>
+
+<section class="lsec"><h2>Sources</h2>
+<p class="refs"><a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.109.1492">Anderson, Absence of Diffusion in Certain Random Lattices, Phys. Rev. 109, 1492 (1958)</a><br><a href="https://iopscience.iop.org/article/10.1088/0034-4885/56/12/001/pdf">Localization: theory and experiment, Rep. Prog. Phys. 56 (1993)</a><br>AI assistance was used for plotting some of the calculations and for reviewing concepts.</p></section>
+</div></div>
+
+
+<!-- OPTICAL DESIGN (previous home page) -->
+<div class="page" data-route="/optics" data-title="Optical design">
 <div class="hero">
 <svg class="wave" id="wave" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
 <div class="wrap">
@@ -152,7 +365,7 @@ footer a{color:var(--photon)}
 <div>
 <h3>Why GRIN lenses</h3>
 <p>GRIN rod lenses bend light with a smoothly varying, parabolic refractive-index profile. That internal symmetry corrects spherical aberration, and 1:1 gapless imaging is much easier to achieve with GRIN lenses. They are also relatively cheap, extremely compact, and easy to mount and stack, a natural fit for a miniscope where size and weight are tightly constrained.</p>
-<p>A rod's length is measured in pitch (P), the fraction of one full sinusoidal ray period. A 0.25P rod collimates light from a point on its face. A 0.5P rod forms an inverted 1:1 image, which is what each rod in this relay does. The first two GRIN lenses serves to have a similar effect; however, it is about a inverted, 0.5x magnfiication image rather than -1, and the last two serves to magnify the image to achieve 1X magnification.</p>
+<p>A rod's length is measured in pitch (P), the fraction of one full sinusoidal ray period. A 0.25P rod collimates light from a point on its face. A 0.5P rod forms an inverted 1:1 image, which is what each rod in this relay does.</p>
 </div>
 <figure class="gl">
 <div class="toggle" role="group" aria-label="GRIN rod length">
@@ -217,7 +430,7 @@ footer a{color:var(--photon)}
 <div class="cards"><a class="card" href="mailto:you@example.com"><h3>Email</h3><p>you@example.com</p></a><a class="card" href="#"><h3>LinkedIn</h3><p>Add your profile link.</p></a><a class="card" href="#"><h3>GitHub</h3><p>Add your profile link.</p></a></div></section></div></div>
 </main>
 
-<div class="wrap"><footer>© Your Name · Built around a 530 nm green beam.</footer></div>
+<div class="wrap"><footer>© Sneha Gupta · Built around a 530 nm green beam.</footer></div>
 
 <script>
 (function(){
@@ -227,7 +440,8 @@ var r=(location.hash.replace(/^#/,"")||"/"),p=null;
 pages.forEach(function(x){if(x.dataset.route===r)p=x});
 if(!p){p=pages[0];r="/"}
 pages.forEach(function(x){x.classList.toggle("on",x===p)});
-links.forEach(function(a){var h=a.getAttribute("href").slice(1);var on=(h==="/"?r==="/":(r===h||r.indexOf(h+"/")===0));if(on)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+var sec=r==="/"?"/":r.indexOf("/materials")===0?"/materials":r.indexOf("/localization")===0?"/localization":r==="/contact"?"/contact":"/optics";
+links.forEach(function(a){if(a.getAttribute("href").slice(1)===sec)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
 document.title=p.dataset.title+" · Optical design portfolio";
 window.scrollTo(0,0);
 var h=p.querySelector("h1,h2");if(h)h.focus({preventScroll:true});
@@ -309,6 +523,80 @@ btns.forEach(function(b){b.addEventListener("click",function(){
   start();
 })});
 start();
+})();
+</script>
+<script>
+// New pages: home wave, polymer chain, WAXS schematic, live Anderson chain
+(function(){
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Home: interference rings
+var w2=document.getElementById("wave2");
+if(w2){var o="";[[760,200],[760,320]].forEach(function(c,i){for(var r=12;r<=720;r+=13){o+='<circle cx="'+c[0]+'" cy="'+c[1]+'" r="'+r+'" fill="none" stroke="'+(i?"#8b6bff":"#5ee7ff")+'" stroke-opacity="'+Math.max(0,.2-r/4200).toFixed(3)+'"/>'}});w2.innerHTML=o}
+
+// Materials: a wiggling polymer chain (C cyan, O red, N blue)
+var ch=document.getElementById("chain");
+if(ch){
+  var n=44,cl=["#5fd0d0","#5fd0d0","#5fd0d0","#e5484d","#5fd0d0","#5b6cff"],g="";
+  for(var i=0;i<n;i++)g+='<circle r="'+(i%6===3||i%6===5?6.5:5.5)+'" fill="'+cl[i%6]+'"/>';
+  ch.innerHTML='<polyline id="cb" fill="none" stroke="#9db0d6" stroke-opacity=".6" stroke-width="2"/>'+g;
+  var cb=document.getElementById("cb"),cs=[].slice.call(ch.querySelectorAll("circle"));
+  var drawChain=function(t){
+    var p=[];
+    cs.forEach(function(c,i){var x=20+i*20,y=65+26*Math.sin(i*.55+t*1.1)+8*Math.sin(i*1.3-t*.7);c.setAttribute("cx",x);c.setAttribute("cy",y.toFixed(1));p.push(x+","+y.toFixed(1))});
+    cb.setAttribute("points",p.join(" "));
+  };
+  drawChain(0);
+  if(!reduce){var cf=function(ms){if(ch.getBoundingClientRect().width)drawChain(ms/1000);requestAnimationFrame(cf)};requestAnimationFrame(cf)}
+}
+
+// Materials: schematic WAXS peaks from reported d-spacings (k = 2*pi/d)
+var wx=document.getElementById("waxs");
+if(wx){
+  var X=function(k){return k*240-80},base=180,sim=2*Math.PI/4.33,exp=2*Math.PI/3.87;
+  var path=function(k0,s,a){var d="";for(var x=40;x<=520;x+=3){var k=(x+80)/240;d+=(x===40?"M":"L")+x+" "+(base-a*Math.exp(-Math.pow(k-k0,2)/(2*s*s))).toFixed(1)}return d};
+  var t='font-family="JetBrains Mono,monospace" font-size="11" fill="#9db0d6"',h='<line x1="40" y1="'+base+'" x2="520" y2="'+base+'" stroke="#7f93b8"/>';
+  [0.5,1,1.5,2,2.5].forEach(function(k){h+='<line x1="'+X(k)+'" y1="'+base+'" x2="'+X(k)+'" y2="'+(base+5)+'" stroke="#7f93b8"/><text x="'+X(k)+'" y="'+(base+19)+'" text-anchor="middle" '+t+'>'+k+'</text>'});
+  h+='<text x="530" y="'+(base+19)+'" '+t+'>k (Å⁻¹)</text>';
+  h+='<path d="'+path(sim,.13,120)+'" fill="none" stroke="#3d7bff" stroke-width="2.5"/><path d="'+path(exp,.05,120)+'" fill="none" stroke="#ff9a3c" stroke-width="2.5" stroke-dasharray="6 4"/>';
+  h+='<text x="'+(X(sim)-100)+'" y="40" '+t+' fill="#3d7bff">simulated, d = 4.33 Å</text><text x="'+(X(exp)+30)+'" y="40" '+t+' fill="#ff9a3c">experimental, d = 3.87 Å</text>';
+  wx.innerHTML=h;
+}
+
+// Anderson: live 1D tight-binding chain, RK4 on i dpsi/dt = H psi (hbar = t = 1)
+var cv=document.getElementById("lab");
+if(cv){
+  var c=cv.getContext("2d"),N=101,mid=50,dt=0.02,seed=11,rnd=[],W=2,t=0;
+  var R=function(){seed=(seed*16807)%2147483647;return seed/2147483647-.5};
+  for(var i=0;i<N;i++)rnd.push(R());
+  var re=new Float64Array(N),im=new Float64Array(N),ta=new Float64Array(N),tb=new Float64Array(N),k=[];
+  for(i=0;i<8;i++)k.push(new Float64Array(N));
+  var f=function(a,b,oa,ob){for(var i=0;i<N;i++){var e=W*rnd[i],l=i>0?1:0,r=i<N-1?1:0;
+    oa[i]=e*b[i]-(l?b[i-1]:0)-(r?b[i+1]:0);ob[i]=-(e*a[i]-(l?a[i-1]:0)-(r?a[i+1]:0))}};
+  var mix=function(h,ka,kb){for(var i=0;i<N;i++){ta[i]=re[i]+h*ka[i];tb[i]=im[i]+h*kb[i]}};
+  var step=function(){
+    f(re,im,k[0],k[1]);mix(dt/2,k[0],k[1]);f(ta,tb,k[2],k[3]);
+    mix(dt/2,k[2],k[3]);f(ta,tb,k[4],k[5]);mix(dt,k[4],k[5]);f(ta,tb,k[6],k[7]);
+    for(var i=0;i<N;i++){re[i]+=dt/6*(k[0][i]+2*k[2][i]+2*k[4][i]+k[6][i]);im[i]+=dt/6*(k[1][i]+2*k[3][i]+2*k[5][i]+k[7][i])}
+    t+=dt};
+  var reset=function(){re.fill(0);im.fill(0);re[mid]=1;t=0};
+  var draw=function(){
+    var Wd=cv.width,H=cv.height,bw=Wd/N,m=0;
+    c.clearRect(0,0,Wd,H);
+    c.strokeStyle="#8b6bff";c.lineWidth=1.5;c.beginPath();
+    for(var i=0;i<N;i++){var y=H*0.5-W*rnd[i]*(H*0.04);i?c.lineTo(i*bw+bw/2,y):c.moveTo(bw/2,y)}
+    c.stroke();
+    var gr=c.createLinearGradient(0,H,0,0);gr.addColorStop(0,"#3d7bff");gr.addColorStop(1,"#5ee7ff");c.fillStyle=gr;
+    for(i=0;i<N;i++){var p=re[i]*re[i]+im[i]*im[i];m+=p*(i-mid)*(i-mid);var h=Math.sqrt(p)*(H-20);c.fillRect(i*bw+1,H-h,bw-2,h)}
+    document.getElementById("rt").textContent=t.toFixed(1);
+    document.getElementById("rm").textContent=m.toFixed(1);
+  };
+  var sl=document.getElementById("wsl"),wv=document.getElementById("wv");
+  var restart=function(){W=parseFloat(sl.value);wv.textContent=W.toFixed(1);reset();if(reduce){for(var j=0;j<1500;j++)step()}draw()};
+  sl.addEventListener("input",restart);document.getElementById("rst").addEventListener("click",restart);
+  restart();
+  if(!reduce){var loop=function(){if(cv.offsetParent!==null){for(var j=0;j<6;j++)step();draw();if(t>90)reset()}requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+}
 })();
 </script>
 </body>

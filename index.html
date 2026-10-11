@@ -66,7 +66,9 @@ a.card:hover{border-color:var(--photon);background:var(--panel-hi)}
 dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:.95rem;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
 dt{color:var(--mute);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.82rem}dd{margin:0;font-weight:500}
 .crumb{font-size:.9rem;margin:40px 0 0}.crumb a{color:var(--photon)}
-.detail{margin-top:40px;max-width:68ch}
+.detail{margin-top:40px;max-width:none}
+.detail>*{max-width:68ch}
+.detail>.why,.detail>.results{max-width:none}
 .detail h3{margin-top:30px}
 .detail p{margin:0 0 14px}
 .detail ul{margin:0 0 14px;padding-left:22px}
@@ -76,7 +78,7 @@ dt{color:var(--mute);font-family:"JetBrains Mono",ui-monospace,monospace;font-si
 .fig figcaption{color:var(--mute);font-size:.9rem;margin-top:10px}
 .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:28px}
 .figs .fig{margin:0}
-.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0 14px;max-width:none}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0 14px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .stat b{display:block;font-size:1.6rem;letter-spacing:-.02em;color:var(--photon)}
 .stat span{color:var(--mute);font-size:.88rem}
@@ -84,9 +86,20 @@ dt{color:var(--mute);font-family:"JetBrains Mono",ui-monospace,monospace;font-si
 .steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:14px;max-width:62ch}
 .steps li{counter-increment:s;padding-left:46px;position:relative}
 .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--photon);color:var(--photon-ink);display:grid;place-items:center;font:500 .9rem "JetBrains Mono",monospace;box-shadow:0 0 14px rgba(94,231,255,.45)}
+
+/* animated GRIN rod */
+.why{display:grid;grid-template-columns:1fr 1.15fr;gap:28px;align-items:center;margin-top:30px}
+.detail .why h3{margin-top:0}
+.gl{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.gl svg{display:block;width:100%;height:auto}
+.toggle{display:flex;gap:6px;margin-bottom:8px}
+.toggle button{font:500 .85rem "JetBrains Mono",ui-monospace,monospace;color:var(--mute);background:transparent;border:1px solid var(--line);border-radius:999px;padding:4px 14px;cursor:pointer;transition:background .2s,color .2s}
+.toggle button:hover{color:var(--ink);background:var(--glass)}
+.toggle button[aria-pressed="true"]{background:var(--photon);color:var(--photon-ink);border-color:var(--photon)}
+
 footer{margin-top:80px;border-top:1px solid var(--line);padding:24px 0 48px;color:var(--mute);font-size:.95rem}
 footer a{color:var(--photon)}
-@media (max-width:720px){.feature{grid-template-columns:1fr}}
+@media (max-width:720px){.feature,.why{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -128,26 +141,38 @@ footer a{color:var(--photon)}
 <p class="crumb"><a href="#/designs">← All designs</a></p>
 <section class="block" style="padding-top:20px"><div class="feature"><div>
 <h2 tabindex="-1">GRIN miniscope: 1:1 relay for fluorescence imaging</h2><p class="sub">A miniature fluorescence microscope optical system designed and optimized in Ansys Zemax OpticStudio.</p>
-<p>As part of the Computational Imaging Systems Lab at the University of California, San Diego, I designed and optimized a miniature fluorescence microscope (miniscope) built using multiple GRIN (gradient-index) rod lenses. Inspired by the "Krill-Eye" Optical System proposed by researchers at the MIT Media Laboratory [1], the lenses are cascaded into a superposition compound system, and the layout is designed to accommodate an emission bandpass filter and an external illumintation system. The goal is to achieve 1:1 magnifcation and gapless imaging in order to produce properly superimposed images and introduce more symmetry. We aim to maximize the numerical aperature and the usable field of view while minimizing Seidel aberrations.</p></div>
+<p>As part of the Computational Imaging Systems Lab at the University of California, San Diego, I designed and optimized a miniature fluorescence microscope (miniscope) built using multiple GRIN (gradient-index) rod lenses. Inspired by the "Krill-Eye" Optical System proposed by researchers at the MIT Media Laboratory [1], the lenses are cascaded into a superposition compound system, and the layout is designed to accommodate an emission bandpass filter and an external illumination system. The goal is to achieve 1:1 magnification and gapless imaging in order to produce properly superimposed images and introduce more symmetry. We aim to maximize the numerical aperture and the usable field of view while minimizing Seidel aberrations.</p></div>
 <dl><dt>Tool</dt><dd>Zemax OpticStudio</dd><dt>Wavelength</dt><dd>0.530 µm</dd><dt>Elements</dt><dd>4 GRIN rods</dd><dt>Object NA</dt><dd>0.1</dd><dt>Fields</dt><dd>0 and 1 mm object height</dd><dt>Magnification</dt><dd>1:1</dd><dt>Status</dt><dd>In progress</dd></dl></div>
 
 <figure class="fig"><img src="images/grin-layout.png" alt="Zemax ray layout of four cascaded GRIN rod lenses, with on-axis rays in blue and off-axis rays in green" width="1100" height="230"><figcaption>Zemax layout: four GRIN rod lenses relaying the object to the image plane. On-axis rays are blue, off-axis rays are green. The orange surface marks an intermediate surface in the prescription.</figcaption></figure>
 
 <div class="detail">
-<h3>Why GRIN lenses</h3>
-<p> GRIN rod lenses bend light with a parabolic, smoothly varying, refractive-index profile. Their internal symmetry and the profile corrects spherical aberration, and achieving 1:1 gapless imaging is much easier with GRIN lenses. They are also realtively cheap and extremely compact, easy to mount and stack, and a natural fit for a miniscope, where size and weight are tightly constrained.
-  
 
+<div class="why">
+<div>
+<h3>Why GRIN lenses</h3>
+<p>GRIN rod lenses bend light with a smoothly varying, parabolic refractive-index profile. That internal symmetry corrects spherical aberration, and 1:1 gapless imaging is much easier to achieve with GRIN lenses. They are also relatively cheap, extremely compact, and easy to mount and stack, a natural fit for a miniscope where size and weight are tightly constrained.</p>
+<p>A rod's length is measured in pitch (P), the fraction of one full sinusoidal ray period. A 0.25P rod collimates light from a point on its face. A 0.5P rod forms an inverted 1:1 image, which is what each rod in this relay does.</p>
+</div>
+<figure class="gl">
+<div class="toggle" role="group" aria-label="GRIN rod length">
+<button type="button" data-p="0.25" aria-pressed="false">0.25 P</button>
+<button type="button" data-p="0.5" aria-pressed="true">0.5 P</button>
+</div>
+<svg id="glens" viewBox="0 0 560 250" role="img" aria-label="Animated rays traveling through a GRIN rod lens, shown at quarter pitch and half pitch"></svg>
+<p class="cap" id="glcap"></p>
+</figure>
+</div>
 
 <h3>System architecture</h3>
 <ul>
-<li><b>Cascaded GRIN relay</b> Several GRIN rod lenses are arranged as a superposition compound system. Each set of the four GRIN lenses as shown above produces a 1:1 image of the same object point at the same location on the image plane. Superposing these images gathers more light than a single narrow rod and increases the usable field of view, while the rods’ internal symmetry keeps spherical aberration, distortion, coma, and lateral color low.
-<li><b>External Illumination</b> The design leaves room for a bandpass filter for the emitted fluorescence between the lenses. In order to keep the system compact, an external illumination system will be used which will inharently separated the exitation and emission light, removing the need for dichoric mirror/beamsplitter. </li>
-<li><b>Two-field model</b> The system is evaluated on-axis and at a 1 mm object height, which shows how performance degrades toward the edge of the field.</li>
+<li><b>Cascaded GRIN relay.</b> Several GRIN rod lenses are arranged as a superposition compound system. Each set of the four GRIN lenses as shown above produces a 1:1 image of the same object point at the same location on the image plane. Superposing these images gathers more light than a single narrow rod and increases the usable field of view, while the rods’ internal symmetry keeps spherical aberration, distortion, coma, and lateral color low.</li>
+<li><b>External illumination.</b> The design leaves room for a bandpass filter for the emitted fluorescence between the lenses. To keep the system compact, an external illumination system will be used, which inherently separates the excitation and emission light and removes the need for a dichroic mirror or beamsplitter.</li>
+<li><b>Two-field model.</b> The system is evaluated on-axis and at a 1 mm object height, which shows how performance degrades toward the edge of the field.</li>
 </ul>
 
 <h3>Design goals and optimization</h3>
-<p>The main trade-off in this design is field of view and numerical aperature versus aberration. A wider field is more useful for imaging, and numerial aperature helps with resolution and light-collection, but off-axis rays push the Seidel aberrations (spherical aberration, coma, astigmatism, field curvature, and distortion) up quickly. My workflow:</p>
+<p>The main trade-off in this design is field of view and numerical aperture versus aberration. A wider field is more useful for imaging, and numerical aperture helps with resolution and light collection, but off-axis rays push the Seidel aberrations (spherical aberration, coma, astigmatism, field curvature, and distortion) up quickly. My workflow:</p>
 <ul>
 <li>Set up the prescription in sequential mode with the GRIN rod lenses, and trace both fields at 0.530 µm.</li>
 <li>Define merit function targets for unit magnification and a small spot at the image plane.</li>
@@ -167,7 +192,7 @@ footer a{color:var(--photon)}
 <ul>
 <li>Reduce the off-axis spot size while holding the on-axis performance.</li>
 <li>Design the external illumination system.</li>
-<li>Physically build prototype.</li>
+<li>Physically build a prototype.</li>
 </ul>
 </div>
 
@@ -229,6 +254,61 @@ y=cy-h*Math.cos(Math.PI*(xx-x0)/((rodW+gap)*2));
 pts.push((xx===10?"M":"L")+xx+" "+y.toFixed(1))}
 out+='<path class="ray" style="color:'+cols[k]+';animation-delay:'+(k*0.15)+'s" stroke="'+cols[k]+'" d="'+pts.join(" ")+'"/>'});
 s.innerHTML=out;
+})();
+</script>
+
+<script>
+// Animated GRIN rod: toggle between 0.25 P (collimating) and 0.5 P (inverted 1:1 image)
+(function(){
+var s=document.getElementById("glens");if(!s)return;
+var cap=document.getElementById("glcap"),btns=[].slice.call(document.querySelectorAll(".toggle button"));
+var P=800,cy=120,x0=40,h=30,g=2*Math.PI/P,amps=[-45,-22,0,22,45];
+var cols=["#8b6bff","#3d7bff","#2fd27a","#f2d94a","#ff9a3c"];
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var mode=0.5,L,Z,dots=[],raf=0;
+function yAt(a,z){
+  if(z<=L)return cy-(h*Math.cos(g*z)+a*Math.sin(g*z));
+  var m=g*(-h*Math.sin(g*L)+a*Math.cos(g*L));
+  return cy-(h*Math.cos(g*L)+a*Math.sin(g*L)+m*(z-L));
+}
+function build(){
+  L=P*mode;Z=mode===0.5?L:L+200;
+  var o='<defs><linearGradient id="gi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ee7ff" stop-opacity=".05"/><stop offset=".5" stop-color="#5ee7ff" stop-opacity=".30"/><stop offset="1" stop-color="#5ee7ff" stop-opacity=".05"/></linearGradient></defs>';
+  o+='<rect x="'+x0+'" y="'+(cy-75)+'" width="'+L+'" height="150" rx="8" fill="url(#gi)" stroke="#5ee7ff" stroke-opacity=".55"/>';
+  o+='<line x1="'+(x0-30)+'" y1="'+cy+'" x2="'+(x0+Z+20)+'" y2="'+cy+'" stroke="#7f93b8" stroke-opacity=".45" stroke-dasharray="4 6"/>';
+  amps.forEach(function(a,k){
+    var d="";
+    for(var z=0;z<=Z;z+=4)d+=(z?"L":"M")+(x0+z)+" "+yAt(a,z).toFixed(1);
+    o+='<path d="'+d+'" fill="none" stroke="'+cols[k]+'" stroke-width="1.5" stroke-opacity=".75" stroke-linecap="round"/>';
+  });
+  o+='<circle cx="'+x0+'" cy="'+(cy-h)+'" r="4.5" fill="#fff"/>';
+  if(mode===0.5)o+='<circle cx="'+(x0+L)+'" cy="'+(cy+h)+'" r="5" fill="none" stroke="#fff" stroke-width="1.5"/>';
+  amps.forEach(function(a,k){o+='<circle class="d" data-a="'+a+'" r="3.4" fill="'+cols[k]+'" style="filter:drop-shadow(0 0 4px '+cols[k]+')"/>'});
+  var t='font-family="JetBrains Mono,monospace" font-size="11" fill="#9db0d6"';
+  o+='<text x="'+x0+'" y="'+(cy+98)+'" text-anchor="middle" '+t+'>input face</text>';
+  o+='<text x="'+(x0+L)+'" y="'+(cy+98)+'" text-anchor="middle" '+t+'>'+(mode===0.5?'output face / image':'output face')+'</text>';
+  o+='<text x="'+x0+'" y="18" '+t+'>n(r) ≈ n₀(1 − g²r²/2)  ·  brightest = highest index</text>';
+  if(mode===0.25)o+='<text x="'+(x0+L+100)+'" y="'+(cy-80)+'" text-anchor="middle" '+t+'>collimated</text>';
+  s.innerHTML=o;
+  dots=[].slice.call(s.querySelectorAll(".d"));
+  cap.textContent=mode===0.5?"0.5 P: the point source is re-imaged at the output face, inverted, at unit magnification.":"0.25 P: rays from one point on the input face leave the rod parallel to each other.";
+  if(reduce)place(L*0.5);
+}
+function place(z){
+  dots.forEach(function(d){
+    if(z>Z){d.setAttribute("opacity","0");return}
+    d.setAttribute("opacity","1");
+    d.setAttribute("cx",x0+z);d.setAttribute("cy",yAt(+d.dataset.a,z));
+  });
+}
+function tick(t){place((t*0.14)%(Z+60));raf=requestAnimationFrame(tick)}
+function start(){cancelAnimationFrame(raf);build();if(!reduce)raf=requestAnimationFrame(tick)}
+btns.forEach(function(b){b.addEventListener("click",function(){
+  mode=parseFloat(b.dataset.p);
+  btns.forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+  start();
+})});
+start();
 })();
 </script>
 </body>

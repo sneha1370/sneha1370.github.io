@@ -60,6 +60,12 @@ h3{margin:0 0 8px;font-size:1.2rem}
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--spec)}
 a.card:hover{border-color:var(--photon);background:var(--panel-hi)}
 .card p{margin:0;color:var(--mute);font-size:.95rem}
+.tag.uc{color:#f2d94a;border-color:#f2d94a;background:rgba(242,217,74,.10)}
+.uc-banner{position:relative;display:flex;gap:16px;align-items:flex-start;margin:0 0 28px;padding:22px 22px 18px;border:1px solid rgba(242,217,74,.55);border-radius:14px;background:rgba(242,217,74,.07);overflow:hidden}
+.uc-banner::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:repeating-linear-gradient(-45deg,#f2d94a 0 12px,#0a1840 12px 24px)}
+.uc-banner svg{flex:none;width:34px;height:34px;margin-top:6px;color:#f2d94a}
+.uc-banner h3{margin:6px 0 4px;color:#f2d94a;font-size:1.1rem}
+.uc-banner p{margin:0;color:var(--ink);max-width:62ch}
 .tag{display:inline-block;font:500 .75rem "JetBrains Mono",ui-monospace,monospace;color:var(--photon);border:1px solid var(--photon);border-radius:999px;padding:1px 10px;margin-bottom:10px}
 .feature{display:grid;grid-template-columns:1.3fr 1fr;gap:32px}
 .feature p{margin:0 0 14px;max-width:60ch}
@@ -365,16 +371,17 @@ footer a{color:var(--photon)}
 <div class="wrap">
 <section class="block"><h2>Featured design</h2><p class="sub">Current main project.</p>
 <div class="cards"><a class="card" href="#/designs/grin-relay"><span class="tag">In progress</span><h3>GRIN miniscope: 1:1 relay</h3><p>Four GRIN rod lenses, unit magnification, minimal aberration at 0.53 µm.</p></a>
-<a class="card" href="#/designs"><span class="tag">In progress</span><h3>Browse all designs</h3><p>More lens systems, spot diagrams, and tolerance studies are in progress.</p></a></div></section>
+<a class="card" href="#/designs"><span class="tag uc">Under construction</span><h3>Browse all designs</h3><p>This page is still under construction. More lens systems, spot diagrams, and tolerance studies are coming.</p></a></div></section>
 </div></div>
 
 <!-- DESIGNS -->
 <div class="page" data-route="/designs" data-title="Designs"><div class="wrap">
-<section class="block"><h2 tabindex="-1">Optical designs</h2><p class="sub">Each design has its own page with specs, approach, and plots. This collection is still in progress.</p>
+<section class="block"><h2 tabindex="-1">Optical designs</h2><p class="sub">Each design has its own page with specs, approach, and plots.</p>
+<div class="uc-banner" role="note"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4 30 28H2z"/><path d="M16 13v7M16 24v.5"/></svg><div><h3>Under construction</h3><p>This collection is still being built. The GRIN miniscope is the only finished design page so far; the other cards are placeholders for designs coming soon.</p></div></div>
 <div class="cards">
 <a class="card" href="#/designs/grin-relay"><span class="tag">In progress</span><h3>GRIN miniscope</h3><p>Fluorescence miniscope optics built from a cascade of GRIN rod lenses.</p></a>
-<a class="card" href="#/designs/design-2"><span class="tag">Placeholder</span><h3>Design title</h3><p>One sentence on the goal, the tool, and the result.</p></a>
-<a class="card" href="#/designs/design-3"><span class="tag">Placeholder</span><h3>Design title</h3><p>Add spot diagrams, MTF curves, or a tolerance study here.</p></a>
+<a class="card" href="#/designs/design-2"><span class="tag uc">Coming soon</span><h3>Design title</h3><p>One sentence on the goal, the tool, and the result.</p></a>
+<a class="card" href="#/designs/design-3"><span class="tag uc">Coming soon</span><h3>Design title</h3><p>Add spot diagrams, MTF curves, or a tolerance study here.</p></a>
 </div></section></div></div>
 
 <!-- DESIGN: GRIN MINISCOPE -->

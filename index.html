@@ -128,26 +128,28 @@ footer a{color:var(--photon)}
 <p class="crumb"><a href="#/designs">← All designs</a></p>
 <section class="block" style="padding-top:20px"><div class="feature"><div>
 <h2 tabindex="-1">GRIN miniscope: 1:1 relay for fluorescence imaging</h2><p class="sub">A miniature fluorescence microscope optical system designed and optimized in Ansys Zemax OpticStudio.</p>
-<p>As part of the Computational Imaging Systems Lab at University of California, San Diego, I designed and optimized a miniature fluorescence microscope (miniscope) built using multiple GRIN (gradient-index) rod lenses. The lenses are cascaded into a superposition compound system, and the layout is designed to accommodate an emission bandpass filter and an external illumintation system. The goal is to maximize the usable field of view while minimizing Seidel aberrations.</p></div>
+<p>As part of the Computational Imaging Systems Lab at the University of California, San Diego, I designed and optimized a miniature fluorescence microscope (miniscope) built using multiple GRIN (gradient-index) rod lenses. Inspired by the "Krill-Eye" Optical System proposed by researchers at the MIT Media Laboratory [1], the lenses are cascaded into a superposition compound system, and the layout is designed to accommodate an emission bandpass filter and an external illumintation system. The goal is to achieve 1:1 magnifcation and gapless imaging in order to produce properly superimposed images and introduce more symmetry. We aim to maximize the numerical aperature and the usable field of view while minimizing Seidel aberrations.</p></div>
 <dl><dt>Tool</dt><dd>Zemax OpticStudio</dd><dt>Wavelength</dt><dd>0.530 µm</dd><dt>Elements</dt><dd>4 GRIN rods</dd><dt>Object NA</dt><dd>0.1</dd><dt>Fields</dt><dd>0 and 1 mm object height</dd><dt>Magnification</dt><dd>1:1</dd><dt>Status</dt><dd>In progress</dd></dl></div>
 
 <figure class="fig"><img src="images/grin-layout.png" alt="Zemax ray layout of four cascaded GRIN rod lenses, with on-axis rays in blue and off-axis rays in green" width="1100" height="230"><figcaption>Zemax layout: four GRIN rod lenses relaying the object to the image plane. On-axis rays are blue, off-axis rays are green. The orange surface marks an intermediate surface in the prescription.</figcaption></figure>
 
 <div class="detail">
 <h3>Why GRIN lenses</h3>
-<p>GRIN rod lenses focus light through a smoothly varying refractive index inside the glass, so they have flat entrance and exit faces. That makes them very compact, easy to mount and stack, and a natural fit for a head-mounted miniscope, where size and weight are tightly constrained.</p>
+<p> GRIN rod lenses bend light with a parabolic, smoothly varying, refractive-index profile. Their internal symmetry and the profile corrects spherical aberration, and achieving 1:1 gapless imaging is much easier with GRIN lenses. They are also realtively cheap and extremely compact, easy to mount and stack, and a natural fit for a miniscope, where size and weight are tightly constrained.
+  
+
 
 <h3>System architecture</h3>
 <ul>
-<li><b>Cascaded GRIN relay</b> Several GRIN rod lenses are arranged as a superposition compound system. Each segment relays the image onward, so the optical path can be extended while the overall magnification stays at 1:1.</li>
-<li><b>External Illumination</b> The design leaves room for a bandpass filter for the emitted fluorescence between the lenses. In order to limit the size of the system, an external illumination system will be used which will inharently separated the exitation and emission light, removing the need for dichoric mirror. </li>
+<li><b>Cascaded GRIN relay</b> Several GRIN rod lenses are arranged as a superposition compound system. Each set of the four GRIN lenses as shown above produces a 1:1 image of the same object point at the same location on the image plane. Superposing these images gathers more light than a single narrow rod and increases the usable field of view, while the rods’ internal symmetry keeps spherical aberration, distortion, coma, and lateral color low.
+<li><b>External Illumination</b> The design leaves room for a bandpass filter for the emitted fluorescence between the lenses. In order to keep the system compact, an external illumination system will be used which will inharently separated the exitation and emission light, removing the need for dichoric mirror/beamsplitter. </li>
 <li><b>Two-field model</b> The system is evaluated on-axis and at a 1 mm object height, which shows how performance degrades toward the edge of the field.</li>
 </ul>
 
 <h3>Design goals and optimization</h3>
-<p>The main trade-off in this design is field of view versus aberration. A wider field is more useful for imaging, but off-axis rays push the Seidel aberrations (spherical aberration, coma, astigmatism, field curvature, and distortion) up quickly. My workflow:</p>
+<p>The main trade-off in this design is field of view and numerical aperature versus aberration. A wider field is more useful for imaging, and numerial aperature helps with resolution and light-collection, but off-axis rays push the Seidel aberrations (spherical aberration, coma, astigmatism, field curvature, and distortion) up quickly. My workflow:</p>
 <ul>
-<li>Set up the prescription in sequential mode with the GRIN rod lenses, and trace both fields at 0.53 µm.</li>
+<li>Set up the prescription in sequential mode with the GRIN rod lenses, and trace both fields at 0.530 µm.</li>
 <li>Define merit function targets for unit magnification and a small spot at the image plane.</li>
 <li>Iterate on lens spacing and focus positions, and test how small shifts of individual surfaces affect the on-axis and off-axis spots.</li>
 <li>Check the front of the first lens for vignetting. A few marginal rays were clipped there, so I worked on trimming them out of the beam.</li>
@@ -179,14 +181,6 @@ footer a{color:var(--photon)}
 <div class="page" data-route="/designs/design-3" data-title="Design 3"><div class="wrap"><p class="crumb"><a href="#/designs">← All designs</a></p>
 <section class="block" style="padding-top:20px"><h2 tabindex="-1">Design title</h2><p class="sub">Replace this page with another design.</p><p class="prose">Add MTF curves, a tolerance study, or a comparison against the first design.</p></section></div></div>
 
-<!-- NOTES -->
-<div class="page" data-route="/notes" data-title="Notes"><div class="wrap">
-<section class="block"><h2 tabindex="-1">Design notes</h2><p class="sub">The workflow I follow, and a place for write-ups.</p>
-<ol class="steps"><li><h3>Specify</h3>Wavelength, NA, field, magnification, and package size.</li>
-<li><h3>Model</h3>Set up the system in Zemax OpticStudio and trace on-axis and off-axis fields.</li>
-<li><h3>Optimize</h3>Tune merit-function targets and watch for vignetting and aberrations.</li>
-<li><h3>Tolerance</h3>Check how spacing, tilt, and index errors move performance.</li>
-<li><h3>Build and test</h3>Verify on the bench and compare against the model.</li></ol></section></div></div>
 
 <!-- ABOUT -->
 <div class="page" data-route="/about" data-title="About"><div class="wrap">

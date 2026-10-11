@@ -173,6 +173,14 @@ dt{color:var(--mute);font-family:"JetBrains Mono",ui-monospace,monospace;font-si
 @media (max-width:720px){.msec{grid-template-columns:1fr;gap:10px}.pipe{grid-template-columns:1fr;gap:14px}.pipe li::after{display:none}.find{grid-template-columns:1fr;gap:2px}}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
 
+.split{display:grid;grid-template-columns:minmax(220px,380px) 1fr;gap:20px;align-items:center}
+.split canvas{display:block;width:100%;height:auto;aspect-ratio:1;image-rendering:pixelated}
+.thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.thumbs button{background:none;border:1px solid var(--line);border-radius:8px;padding:4px;color:var(--mute);font:400 .78rem "JetBrains Mono",ui-monospace,monospace;cursor:pointer}
+.thumbs button:hover{border-color:var(--photon)}
+.thumbs canvas{display:block;width:100%;height:auto;aspect-ratio:1;image-rendering:pixelated;border-radius:4px;margin-bottom:4px}
+.toggle{flex-wrap:wrap;margin:10px 0}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
 footer{margin-top:80px;border-top:1px solid var(--line);padding:24px 0 48px;color:var(--mute);font-size:.95rem}
 footer a{color:var(--photon)}
 @media (max-width:720px){.feature,.why{grid-template-columns:1fr}}
@@ -281,11 +289,13 @@ footer a{color:var(--photon)}
 <p class="lede">A numerical study of Anderson localization in one- and two-dimensional tight-binding lattices: how random on-site energy turns spreading, extended states into confined ones.</p>
 </header>
 
-<section class="lab" aria-label="Live simulation">
-<canvas id="lab" width="900" height="300" role="img" aria-label="Probability density of a particle on a 101-site disordered chain, evolving in time"></canvas>
-<div class="ctl"><label for="wsl">Disorder W = <b id="wv">2.0</b></label><input id="wsl" type="range" min="0" max="10" step="0.5" value="2"><button class="pill" id="rst" type="button">Restart</button></div>
-<div class="read"><span>t = <b id="rt">0.0</b></span><span>⟨x²⟩ = <b id="rm">0.0</b> sites²</span><span>bars: |ψ|² (square-root scale) · violet line: on-site energies</span></div>
-<p class="cap">A particle starts on the middle site of a 101-site chain with t = 1 and hard walls. This runs live in your browser; the report's results used N = 100 and exact diagonalization.</p>
+<section class="lab" aria-label="1D wave packet animation">
+<canvas id="lab1" width="960" height="330" role="img" aria-label="Kymograph, mean squared displacement and probability density of a wave packet on a 100-site disordered chain"></canvas>
+<div class="ctl"><label for="w1">Disorder W = <b id="w1v">2.0</b></label><input id="w1" type="range" min="0" max="10" step="0.5" value="2"></div>
+<div class="ctl"><button class="pill" id="p1" type="button">Pause</button><input id="t1" type="range" min="0" max="299" step="1" value="0" aria-label="Time"></div>
+<div class="toggle" role="group" aria-label="Jump to a snapshot"><button type="button" data-t1="0">t = 0</button><button type="button" data-t1="5">t = 5</button><button type="button" data-t1="10">t = 10</button><button type="button" data-t1="20">t = 20</button><button type="button" data-t1="40">t = 40</button></div>
+<div class="read"><span>t = <b id="r1t">0.0</b></span><span>⟨x²⟩ = <b id="r1m">0.0</b> sites²</span></div>
+<p class="cap">Left: |ψ|² through time. Middle: mean squared displacement. Right: |ψ|² at the current time. This follows the report's 1D time-evolution code: build the tridiagonal Hamiltonian (t = 1, N = 100), diagonalize it, project the site-50 starting state onto the eigenstates, multiply each by exp(−iEₙt), and sum. It runs in your browser with its own seeded random landscape, so the numbers differ slightly from the report's NumPy realization. Pause stops it, and it stops by itself at t = 40.</p>
 </section>
 
 <section class="lsec"><h2>The model</h2>
@@ -297,7 +307,7 @@ footer a{color:var(--photon)}
 <div class="cols">
 <div class="box"><h3>Exact diagonalization</h3><p>The tight-binding Hamiltonian is a real symmetric tridiagonal matrix, diagonalized with scipy.linalg.eigh. IPR is averaged over eigenstates and many independent disorder realizations.</p></div>
 <div class="box"><h3>Time evolution</h3><p>The initial state is projected onto each eigenstate and every term is multiplied by e<sup>−iEₙt</sup> (ħ = 1), which solves the time-dependent Schrödinger equation semi-analytically.</p></div>
-<div class="box"><h3>2D extension</h3><p>A square lattice is mapped onto a one-dimensional index, so a 3 × 3 lattice becomes a 9 × 9 matrix, with hopping −t between nearest neighbors and onsite disorder on the diagonal. The same methods then apply.</p></div>
+<div class="box"><h3>2D extension</h3><p>A square lattice is mapped onto a one-dimensional index, so a 3 × 3 lattice becomes a 9 × 9 matrix, with hopping −t to all eight surrounding sites (sides and diagonals) and onsite disorder on the diagonal. The same methods then apply.</p></div>
 </div></section>
 
 <section class="lsec"><h2>One dimension</h2>
@@ -315,6 +325,16 @@ footer a{color:var(--photon)}
 
 <section class="lsec"><h2>Two dimensions</h2>
 <p>The trend matches 1D, but it is more gradual. On the 100 × 100 lattice the IPR of the plotted eigenstate is 0.0003 at W = 0 and 0.5, 0.0004 at W = 2, and 0.0056 at W = 8, where the probability collects in a small patch. Wave packets still spread across much of the lattice at W = 2, and the mean squared displacement at t = 100 falls from about 1650 (W = 0) to about 1550 (W = 2) and 1150 (W = 8), far above the 1D values.</p>
+<div class="lab" style="margin:22px 0">
+<h3 style="margin-top:0">Figure 3.6, animated</h3>
+<div class="split"><canvas id="snap" width="20" height="20" role="img" aria-label="Probability density of a wave packet on a small disordered lattice"></canvas>
+<div><div class="toggle" role="group" aria-label="Lattice size"><button type="button" data-l2="16" aria-pressed="false">16 × 16</button><button type="button" data-l2="20" aria-pressed="true">20 × 20</button><button type="button" data-l2="24" aria-pressed="false">24 × 24</button></div>
+<div class="ctl"><label for="w2">Disorder W = <b id="w2v">2.0</b></label><input id="w2" type="range" min="0" max="10" step="0.5" value="2"></div>
+<div class="ctl"><button class="pill" id="p2" type="button">Pause</button><input id="t2" type="range" min="0" max="119" step="1" value="0" aria-label="Time"></div>
+<div class="read"><span>t = <b id="r2t">0.0</b></span><span>⟨r²⟩ = <b id="r2m">0.0</b></span><span>color scale 0 to <b id="r2v">1</b></span><span id="r2s"></span></div></div></div>
+<div class="thumbs" id="thumbs"></div>
+<p class="cap">This runs the report's 2D method in your browser: build the Hamiltonian (hopping −t to the right, down and both diagonals, random energies on the diagonal), fully diagonalize it, project the center-site state onto the eigenstates, multiply each by exp(−iEt), and sum. The five thumbnails mirror Fig. 3.6 (t = 0, 25%, 50%, 75% and 100% of the time range), each with its own color scale. A full diagonalization of the report's 100 × 100 lattice (a 10,000 × 10,000 matrix) is too heavy for a browser, so the lattice here is 16 to 24 sites on a side and the time range shrinks with it (t = 0 to L instead of 0 to 100). On a lattice this small the packet reaches the walls early, so later frames show reflections rather than the report's open-lattice spreading. Changing W or the size recomputes the diagonalization, which takes about a second at 24 × 24 and longer on a phone. Use Pause at any time.</p>
+</div>
 <p>Two-dimensional systems localize at any disorder in the infinite-size limit, but the localization length grows exponentially as disorder weakens. When it exceeds the lattice size, the states look extended, so a finite 2D lattice needs stronger disorder than a 1D chain to show pronounced localization.</p></section>
 
 <section class="lsec"><h2>Sources</h2>
@@ -563,39 +583,242 @@ if(wx){
   wx.innerHTML=h;
 }
 
-// Anderson: live 1D tight-binding chain, RK4 on i dpsi/dt = H psi (hbar = t = 1)
-var cv=document.getElementById("lab");
+})();
+</script>
+<script>
+// Anderson localization animations
+(function(){
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var MAGMA=[[0,0,4],[28,16,68],[79,18,123],[129,37,129],[181,54,122],[229,80,100],[251,135,97],[254,194,135],[252,253,191]];
+var INFERNO=[[0,0,4],[40,11,84],[101,21,110],[159,42,99],[212,72,66],[245,125,21],[250,193,39],[252,255,164]];
+function ramp(S,x){x=Math.max(0,Math.min(1,x))*(S.length-1);var i=Math.min(S.length-2,Math.floor(x)),f=x-i,a=S[i],b=S[i+1];
+  return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f]}
+
+/* ---------- 1D: same recipe as the Python TDSE code ----------
+   H = tridiagonal(-t) + diag(eps); eigh; c = V^T psi0; psi(t) = V (c exp(-iEt)); MSD = sum (x - i0)^2 |psi|^2 */
+function eigh(d,e){ // symmetric tridiagonal QL with eigenvectors: d diagonal, e[i] couples i and i+1 (e[n-1]=0)
+  var n=d.length,z=new Float64Array(n*n),i,k,l,m,iter,g,r,s,c,p,f,b,dd;
+  for(i=0;i<n;i++)z[i*n+i]=1;
+  for(l=0;l<n;l++){iter=0;
+    do{
+      for(m=l;m<n-1;m++){dd=Math.abs(d[m])+Math.abs(d[m+1]);if(Math.abs(e[m])<=1e-15*dd)break}
+      if(m!==l){
+        if(iter++>60)break;
+        g=(d[l+1]-d[l])/(2*e[l]);r=Math.hypot(g,1);g=d[m]-d[l]+e[l]/(g+(g>=0?r:-r));
+        s=1;c=1;p=0;
+        for(i=m-1;i>=l;i--){
+          f=s*e[i];b=c*e[i];r=Math.hypot(f,g);e[i+1]=r;
+          if(r===0){d[i+1]-=p;e[m]=0;break}
+          s=f/r;c=g/r;g=d[i+1]-p;r=(d[i]-g)*s+2*c*b;p=s*r;d[i+1]=g+p;g=c*r-b;
+          for(k=0;k<n;k++){f=z[k*n+i+1];z[k*n+i+1]=s*z[k*n+i]+c*f;z[k*n+i]=c*z[k*n+i]-s*f}
+        }
+        if(r===0&&i>=l)continue;
+        d[l]-=p;e[l]=g;e[m]=0;
+      }
+    }while(m!==l);
+  }
+  return {E:d,V:z};
+}
+
+
+// Dense real-symmetric eigensolver (Householder tridiagonalization + implicit QL), the same algorithm family LAPACK/numpy eigh uses.
+function eighDense(A,n){ // A: flat Float64Array n*n (overwritten by eigenvectors, column j = eigenvector j); returns eigenvalues
+  var V=A,d=new Float64Array(n),e=new Float64Array(n),i,j,k,l,m,f,g,h,hh,scale,p,r,s,c,c2,c3,dl1,el1,s2,iter,tst1,eps=Math.pow(2,-52);
+  for(j=0;j<n;j++)d[j]=V[(n-1)*n+j];
+  for(i=n-1;i>0;i--){
+    scale=0;h=0;
+    for(k=0;k<i;k++)scale+=Math.abs(d[k]);
+    if(scale===0){
+      e[i]=d[i-1];
+      for(j=0;j<i;j++){d[j]=V[(i-1)*n+j];V[i*n+j]=0;V[j*n+i]=0}
+    }else{
+      for(k=0;k<i;k++){d[k]/=scale;h+=d[k]*d[k]}
+      f=d[i-1];g=Math.sqrt(h);if(f>0)g=-g;
+      e[i]=scale*g;h-=f*g;d[i-1]=f-g;
+      for(j=0;j<i;j++)e[j]=0;
+      for(j=0;j<i;j++){
+        f=d[j];V[j*n+i]=f;g=e[j]+V[j*n+j]*f;
+        for(k=j+1;k<=i-1;k++){g+=V[k*n+j]*d[k];e[k]+=V[k*n+j]*f}
+        e[j]=g;
+      }
+      f=0;
+      for(j=0;j<i;j++){e[j]/=h;f+=e[j]*d[j]}
+      hh=f/(h+h);
+      for(j=0;j<i;j++)e[j]-=hh*d[j];
+      for(j=0;j<i;j++){
+        f=d[j];g=e[j];
+        for(k=j;k<=i-1;k++)V[k*n+j]-=(f*e[k]+g*d[k]);
+        d[j]=V[(i-1)*n+j];V[i*n+j]=0;
+      }
+    }
+    d[i]=h;
+  }
+  for(i=0;i<n-1;i++){
+    V[(n-1)*n+i]=V[i*n+i];V[i*n+i]=1;h=d[i+1];
+    if(h!==0){
+      for(k=0;k<=i;k++)d[k]=V[k*n+i+1]/h;
+      for(j=0;j<=i;j++){
+        g=0;for(k=0;k<=i;k++)g+=V[k*n+i+1]*V[k*n+j];
+        for(k=0;k<=i;k++)V[k*n+j]-=g*d[k];
+      }
+    }
+    for(k=0;k<=i;k++)V[k*n+i+1]=0;
+  }
+  for(j=0;j<n;j++){d[j]=V[(n-1)*n+j];V[(n-1)*n+j]=0}
+  V[(n-1)*n+n-1]=1;e[0]=0;
+  for(i=1;i<n;i++)e[i-1]=e[i];
+  e[n-1]=0;f=0;tst1=0;
+  for(l=0;l<n;l++){
+    tst1=Math.max(tst1,Math.abs(d[l])+Math.abs(e[l]));
+    m=l;while(m<n){if(Math.abs(e[m])<=eps*tst1)break;m++}
+    if(m>l){
+      iter=0;
+      do{
+        iter++;g=d[l];p=(d[l+1]-g)/(2*e[l]);r=Math.hypot(p,1);if(p<0)r=-r;
+        d[l]=e[l]/(p+r);d[l+1]=e[l]*(p+r);dl1=d[l+1];h=g-d[l];
+        for(i=l+2;i<n;i++)d[i]-=h;
+        f+=h;p=d[m];c=1;c2=c;c3=c;el1=e[l+1];s=0;s2=0;
+        for(i=m-1;i>=l;i--){
+          c3=c2;c2=c;s2=s;g=c*e[i];h=c*p;r=Math.hypot(p,e[i]);e[i+1]=s*r;s=e[i]/r;c=p/r;p=c*d[i]-s*g;d[i+1]=h+s*(c*g+s*d[i]);
+          for(k=0;k<n;k++){h=V[k*n+i+1];V[k*n+i+1]=s*V[k*n+i]+c*h;V[k*n+i]=c*V[k*n+i]-s*h}
+        }
+        p=-s*s2*c3*el1*e[l]/dl1;e[l]=s*p;d[l]=c*p;
+      }while(Math.abs(e[l])>eps*tst1&&iter<60);
+    }
+    d[l]=d[l]+f;e[l]=0;
+  }
+  return d;
+}
+
+var cv=document.getElementById("lab1");
 if(cv){
-  var c=cv.getContext("2d"),N=101,mid=50,dt=0.02,seed=11,rnd=[],W=2,t=0;
+  var c=cv.getContext("2d"),N=100,i0=N>>1,NT=300,T=40,seed=2024,u=[];
   var R=function(){seed=(seed*16807)%2147483647;return seed/2147483647-.5};
-  for(var i=0;i<N;i++)rnd.push(R());
-  var re=new Float64Array(N),im=new Float64Array(N),ta=new Float64Array(N),tb=new Float64Array(N),k=[];
-  for(i=0;i<8;i++)k.push(new Float64Array(N));
-  var f=function(a,b,oa,ob){for(var i=0;i<N;i++){var e=W*rnd[i],l=i>0?1:0,r=i<N-1?1:0;
-    oa[i]=e*b[i]-(l?b[i-1]:0)-(r?b[i+1]:0);ob[i]=-(e*a[i]-(l?a[i-1]:0)-(r?a[i+1]:0))}};
-  var mix=function(h,ka,kb){for(var i=0;i<N;i++){ta[i]=re[i]+h*ka[i];tb[i]=im[i]+h*kb[i]}};
-  var step=function(){
-    f(re,im,k[0],k[1]);mix(dt/2,k[0],k[1]);f(ta,tb,k[2],k[3]);
-    mix(dt/2,k[2],k[3]);f(ta,tb,k[4],k[5]);mix(dt,k[4],k[5]);f(ta,tb,k[6],k[7]);
-    for(var i=0;i<N;i++){re[i]+=dt/6*(k[0][i]+2*k[2][i]+2*k[4][i]+k[6][i]);im[i]+=dt/6*(k[1][i]+2*k[3][i]+2*k[5][i]+k[7][i])}
-    t+=dt};
-  var reset=function(){re.fill(0);im.fill(0);re[mid]=1;t=0};
-  var draw=function(){
-    var Wd=cv.width,H=cv.height,bw=Wd/N,m=0;
-    c.clearRect(0,0,Wd,H);
-    c.strokeStyle="#8b6bff";c.lineWidth=1.5;c.beginPath();
-    for(var i=0;i<N;i++){var y=H*0.5-W*rnd[i]*(H*0.04);i?c.lineTo(i*bw+bw/2,y):c.moveTo(bw/2,y)}
-    c.stroke();
-    var gr=c.createLinearGradient(0,H,0,0);gr.addColorStop(0,"#3d7bff");gr.addColorStop(1,"#5ee7ff");c.fillStyle=gr;
-    for(i=0;i<N;i++){var p=re[i]*re[i]+im[i]*im[i];m+=p*(i-mid)*(i-mid);var h=Math.sqrt(p)*(H-20);c.fillRect(i*bw+1,H-h,bw-2,h)}
-    document.getElementById("rt").textContent=t.toFixed(1);
-    document.getElementById("rm").textContent=m.toFixed(1);
+  for(var q=0;q<N;q++)u.push(R());
+  var prob=new Float64Array(N*NT),msd=new Float64Array(NT),msdMax=1,W=2,k=NT-1,playing=!reduce,last=0;
+  var off=document.createElement("canvas");off.width=N;off.height=NT;var oc=off.getContext("2d");
+  var sl=document.getElementById("w1"),wv=document.getElementById("w1v"),ts=document.getElementById("t1"),pb=document.getElementById("p1");
+  var solve=function(){
+    var d=new Float64Array(N),e=new Float64Array(N),j,n,kk;
+    for(j=0;j<N;j++){d[j]=W*u[j];e[j]=j<N-1?-1:0}
+    var s=eigh(d,e),E=s.E,V=s.V,cr=new Float64Array(N),ci=new Float64Array(N);
+    msdMax=1;
+    for(kk=0;kk<NT;kk++){
+      var t=kk*T/(NT-1),re=new Float64Array(N),im=new Float64Array(N);
+      for(n=0;n<N;n++){var cn=V[i0*N+n],ph=E[n]*t,a=cn*Math.cos(ph),b=-cn*Math.sin(ph);
+        for(j=0;j<N;j++){var v=V[j*N+n];re[j]+=v*a;im[j]+=v*b}}
+      var m=0;
+      for(j=0;j<N;j++){var p=re[j]*re[j]+im[j]*im[j];prob[kk*N+j]=p;m+=(j-i0)*(j-i0)*p}
+      msd[kk]=m;if(m>msdMax)msdMax=m;
+    }
+    var vmax=W<=2?0.1:0.3,img=oc.createImageData(N,NT);
+    for(kk=0;kk<NT;kk++)for(j=0;j<N;j++){var col=ramp(MAGMA,prob[kk*N+j]/vmax),o=(kk*N+j)*4;img.data[o]=col[0];img.data[o+1]=col[1];img.data[o+2]=col[2];img.data[o+3]=255}
+    oc.putImageData(img,0,0);
   };
-  var sl=document.getElementById("wsl"),wv=document.getElementById("wv");
-  var restart=function(){W=parseFloat(sl.value);wv.textContent=W.toFixed(1);reset();if(reduce){for(var j=0;j<1500;j++)step()}draw()};
-  sl.addEventListener("input",restart);document.getElementById("rst").addEventListener("click",restart);
-  restart();
-  if(!reduce){var loop=function(){if(cv.offsetParent!==null){for(var j=0;j<6;j++)step();draw();if(t>90)reset()}requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+  var mono='11px "JetBrains Mono",monospace',INK="#9db0d6",CY="#5ee7ff";
+  var draw=function(){
+    var Wd=cv.width,H=cv.height,top=34,bot=H-34,t=k*T/(NT-1);
+    c.clearRect(0,0,Wd,H);c.font=mono;c.fillStyle=INK;c.strokeStyle="rgba(157,176,214,.35)";c.lineWidth=1;
+    // A: kymograph
+    var ax=40,aw=250;c.fillText("|ψ|² over time",ax,20);
+    c.imageSmoothingEnabled=false;c.drawImage(off,ax,top,aw,bot-top);c.strokeRect(ax,top,aw,bot-top);
+    var ly=top+(bot-top)*k/(NT-1);c.strokeStyle=CY;c.beginPath();c.moveTo(ax,ly);c.lineTo(ax+aw,ly);c.stroke();
+    c.fillStyle=INK;c.fillText("site",ax+aw/2-10,H-10);c.fillText("0",ax,H-10);c.fillText("100",ax+aw-20,H-10);
+    c.fillText("t=0",6,top+8);c.fillText("t=40",2,bot);
+    // B: MSD
+    var bx=340,bw=250;c.fillStyle=INK;c.fillText("⟨x²(t)⟩",bx,20);c.strokeStyle="rgba(157,176,214,.35)";c.strokeRect(bx,top,bw,bot-top);
+    c.strokeStyle="#3d7bff";c.lineWidth=2;c.beginPath();
+    for(var kk=0;kk<NT;kk++){var X=bx+bw*kk/(NT-1),Y=bot-(bot-top)*msd[kk]/msdMax;kk?c.lineTo(X,Y):c.moveTo(X,Y)}c.stroke();c.lineWidth=1;
+    var mx=bx+bw*k/(NT-1),my=bot-(bot-top)*msd[k]/msdMax;c.fillStyle=CY;c.beginPath();c.arc(mx,my,4,0,7);c.fill();
+    c.fillStyle=INK;c.fillText("time",bx+bw/2-12,H-10);c.fillText(msdMax.toFixed(0),bx+4,top+12);
+    // C: |psi|^2 now
+    var cx=640,cw=290,pm=0,j;for(j=0;j<N;j++)pm=Math.max(pm,prob[k*N+j]);pm=Math.max(pm*1.15,1e-3);
+    c.fillStyle=INK;c.fillText("|ψ|² at t = "+t.toFixed(1),cx,20);c.strokeStyle="rgba(157,176,214,.35)";c.strokeRect(cx,top,cw,bot-top);
+    c.beginPath();c.moveTo(cx,bot);for(j=0;j<N;j++)c.lineTo(cx+cw*j/(N-1),bot-(bot-top)*prob[k*N+j]/pm);c.lineTo(cx+cw,bot);
+    c.fillStyle="rgba(94,231,255,.25)";c.fill();c.strokeStyle=CY;c.lineWidth=2;c.stroke();c.lineWidth=1;
+    c.fillStyle=INK;c.fillText("site",cx+cw/2-10,H-10);c.fillText(pm.toFixed(3),cx+4,top+12);
+    document.getElementById("r1t").textContent=t.toFixed(1);document.getElementById("r1m").textContent=msd[k].toFixed(1);
+    ts.value=k;pb.textContent=playing?"Pause":(k>=NT-1?"Replay":"Play");
+  };
+  var running=false;
+  var loop=function(ms){
+    if(!playing||cv.offsetParent===null){running=false;return}
+    if(ms-last>28){last=ms;k+=2;if(k>=NT-1){k=NT-1;playing=false}draw()}
+    requestAnimationFrame(loop)};
+  var kick=function(){if(playing&&!running){running=true;requestAnimationFrame(loop)}};
+  window.addEventListener("hashchange",function(){setTimeout(kick,0)});
+  var resolve=function(){W=parseFloat(sl.value);wv.textContent=W.toFixed(1);solve();draw()};
+  sl.addEventListener("input",resolve);
+  ts.addEventListener("input",function(){playing=false;k=parseInt(ts.value,10);draw()});
+  pb.addEventListener("click",function(){if(!playing&&k>=NT-1)k=0;playing=!playing;draw();kick()});
+  [].slice.call(document.querySelectorAll("[data-t1]")).forEach(function(b){b.addEventListener("click",function(){playing=false;k=Math.round(parseFloat(b.dataset.t1)/T*(NT-1));draw()})});
+  resolve();if(!reduce){k=0;draw();kick()}
+}
+
+/* ---------- 2D: Figure 3.6 method run in the browser on a small lattice ----------
+   Same steps as the report's code: build H (right, down and both diagonal hops of -t, disorder on the diagonal),
+   eigh, c = V^T psi0 (centre site), psi(t) = V (c exp(-iEt)), MSD = sum R^2 |psi|^2 */
+var snap=document.getElementById("snap");
+if(snap){
+  var L=20,NF=120,Wd2=2,f2=0,play2=!reduce,run2=false,last2=0,n=0,Ev,Vv,ctr=0,U2=[];
+  var LUT=[];for(var li=0;li<256;li++)LUT.push(ramp(INFERNO,li/255));
+  var FR=[0,.25,.5,.75,1],thumbs=document.getElementById("thumbs"),tcv=[],tlab=[];
+  var sl2=document.getElementById("t2"),pb2=document.getElementById("p2"),ws=document.getElementById("w2"),wl=document.getElementById("w2v"),st=document.getElementById("r2s");
+  var szb=[].slice.call(document.querySelectorAll("[data-l2]"));
+  var Tmax=function(){return L};
+  var build=function(){
+    n=L*L;var H=new Float64Array(n*n),i,j,idx=function(a,b){return a*L+b};
+    var hop=function(a,b){H[a*n+b]-=1;H[b*n+a]-=1};
+    for(i=0;i<L;i++)for(j=0;j<L;j++){
+      if(j+1<L)hop(idx(i,j),idx(i,j+1));
+      if(i+1<L)hop(idx(i,j),idx(i+1,j));
+      if(i+1<L&&j+1<L)hop(idx(i,j),idx(i+1,j+1));
+      if(i+1<L&&j-1>=0)hop(idx(i,j),idx(i+1,j-1));
+    }
+    for(i=0;i<n;i++)H[i*n+i]=Wd2*U2[i];
+    Ev=eighDense(H,n);Vv=H;ctr=(L>>1)*L+(L>>1);
+  };
+  var psiProb=function(t){
+    var re=new Float64Array(n),im=new Float64Array(n),m,r;
+    for(m=0;m<n;m++){var cm=Vv[ctr*n+m],ph=Ev[m]*t,a=cm*Math.cos(ph),b=-cm*Math.sin(ph);
+      for(r=0;r<n;r++){var v=Vv[r*n+m];re[r]+=v*a;im[r]+=v*b}}
+    var p=new Float64Array(n);for(r=0;r<n;r++)p[r]=re[r]*re[r]+im[r]*im[r];return p};
+  var paint=function(cvs,p){
+    var g=cvs.getContext("2d"),img=g.createImageData(L,L),mx=0,i,j;
+    for(i=0;i<n;i++)if(p[i]>mx)mx=p[i];
+    for(i=0;i<L;i++)for(j=0;j<L;j++){var col=LUT[Math.round(255*p[i*L+j]/mx)],o=((L-1-i)*L+j)*4;img.data[o]=col[0];img.data[o+1]=col[1];img.data[o+2]=col[2];img.data[o+3]=255}
+    g.putImageData(img,0,0);return mx};
+  var msd2=function(p){var s=0,x0=L>>1,i,j;for(i=0;i<L;i++)for(j=0;j<L;j++)s+=((i-x0)*(i-x0)+(j-x0)*(j-x0))*p[i*L+j];return s};
+  var show=function(){
+    var t=f2*Tmax()/(NF-1),p=psiProb(t),mx=paint(snap,p);
+    document.getElementById("r2t").textContent=t.toFixed(1);
+    document.getElementById("r2m").textContent=msd2(p).toFixed(1);
+    document.getElementById("r2v").textContent=mx.toExponential(2);
+    sl2.value=f2;pb2.textContent=play2?"Pause":(f2>=NF-1?"Replay":"Play")};
+  var snaps=function(){
+    thumbs.innerHTML="";tcv=[];
+    FR.forEach(function(fr){var b=document.createElement("button"),cc=document.createElement("canvas"),sp=document.createElement("span"),t=fr*Tmax();
+      cc.width=L;cc.height=L;sp.textContent="t = "+t.toFixed(t%1?2:0);b.type="button";b.setAttribute("aria-label","Jump to t = "+t);
+      b.appendChild(cc);b.appendChild(sp);thumbs.appendChild(b);paint(cc,psiProb(t));
+      b.addEventListener("click",function(){play2=false;f2=Math.round(fr*(NF-1));show()})});
+    snap.width=L;snap.height=L};
+  var solve=function(){
+    st.textContent="computing…";
+    setTimeout(function(){
+      var i,seed=5;U2=[];for(i=0;i<L*L;i++){seed=(seed*16807)%2147483647;U2.push(seed/2147483647-.5)}
+      build();snaps();show();st.textContent="";kick2()},30)};
+  var loop2=function(ms){
+    if(!play2||snap.offsetParent===null){run2=false;return}
+    if(ms-last2>60){last2=ms;f2++;if(f2>=NF-1){f2=NF-1;play2=false}show()}
+    requestAnimationFrame(loop2)};
+  var kick2=function(){if(play2&&!run2){run2=true;requestAnimationFrame(loop2)}};
+  window.addEventListener("hashchange",function(){setTimeout(kick2,0)});
+  ws.addEventListener("input",function(){wl.textContent=parseFloat(ws.value).toFixed(1)});
+  ws.addEventListener("change",function(){Wd2=parseFloat(ws.value);solve()});
+  szb.forEach(function(b){b.addEventListener("click",function(){L=parseInt(b.dataset.l2,10);f2=0;szb.forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});solve()})});
+  sl2.addEventListener("input",function(){play2=false;f2=parseInt(sl2.value,10);show()});
+  pb2.addEventListener("click",function(){if(!play2&&f2>=NF-1)f2=0;play2=!play2;show();kick2()});
+  solve();
 }
 })();
 </script>
